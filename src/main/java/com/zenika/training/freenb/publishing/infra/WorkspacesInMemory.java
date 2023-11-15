@@ -3,10 +3,12 @@ package com.zenika.training.freenb.publishing.infra;
 import com.zenika.training.freenb.publishing.domain.IdWorkspace;
 import com.zenika.training.freenb.publishing.domain.Workspace;
 import com.zenika.training.freenb.publishing.domain.Workspaces;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Repository
 public class WorkspacesInMemory implements Workspaces {
 
     private Map<IdWorkspace, Workspace> map = new HashMap<>();

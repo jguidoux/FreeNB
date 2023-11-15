@@ -1,4 +1,4 @@
-package com.zenika.training.freenb.publishing;
+package com.zenika.training.freenb.publishing.applcation;
 
 import com.zenika.training.freenb.publishing.application.CreateWorkspaceService;
 import com.zenika.training.freenb.publishing.domain.*;
