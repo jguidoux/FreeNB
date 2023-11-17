@@ -3,7 +3,9 @@ package com.zenika.training.freenb.reservation.api;
 import com.zenika.training.freenb.reservation.application.AddNewAvailableOffer;
 import com.zenika.training.freenb.reservation.domain.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.OfferId;
+import org.springframework.stereotype.Service;
 
+@Service
 public class OfferPublishedConsumer {
     private final AddNewAvailableOffer service;
 

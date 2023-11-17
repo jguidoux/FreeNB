@@ -5,6 +5,7 @@ import com.zenika.training.freenb.publishing.application.CreateWorkspaceService;
 import com.zenika.training.freenb.publishing.domain.OfferPublisher;
 import com.zenika.training.freenb.publishing.domain.Offers;
 import com.zenika.training.freenb.publishing.domain.Workspaces;
+import com.zenika.training.freenb.reservation.application.AddNewAvailableOffer;
 import com.zenika.training.freenb.reservation.application.SearchCorrespondingOffers;
 import com.zenika.training.freenb.reservation.domain.AvailableOffers;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,12 @@ public class SpringConfig {
     }
 
     @Bean
-    SearchCorrespondingOffers searchCorrespondingOffers(AvailableOffers availableOffes) {
+    public SearchCorrespondingOffers searchCorrespondingOffers(AvailableOffers availableOffes) {
         return new SearchCorrespondingOffers(availableOffes);
+    }
+
+    @Bean
+    public AddNewAvailableOffer addNewAvailableOffer(AvailableOffers availableOffers) {
+        return new AddNewAvailableOffer(availableOffers);
     }
 }
