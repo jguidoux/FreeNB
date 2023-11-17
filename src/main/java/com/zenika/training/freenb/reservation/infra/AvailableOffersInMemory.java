@@ -21,6 +21,6 @@ public class AvailableOffersInMemory implements AvailableOffers {
 
     @Override
     public void add(AvailableOffer availableOffer) {
-        repo.put(availableOffer.getOfferId(), availableOffer);
+        repo.put(availableOffer.getId(), availableOffer);
     }
 }

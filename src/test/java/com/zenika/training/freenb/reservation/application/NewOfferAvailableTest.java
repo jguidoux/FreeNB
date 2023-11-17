@@ -28,6 +28,6 @@ public class NewOfferAvailableTest {
 
         assertThat(foundOffers).hasSize(1);
         AvailableOffer offer = foundOffers.get(0);
-        assertThat(offer.getOfferId()).isEqualTo(availableOffer.getOfferId());
+        assertThat(offer.getId()).isEqualTo(availableOffer.getId());
     }
 }

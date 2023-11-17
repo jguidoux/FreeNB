@@ -7,7 +7,4 @@ public class AvailableOffer extends AggregateRoot<OfferId> {
             super(offerId);
     }
 
-    public OfferId getOfferId() {
-        return null;
-    }
 }
