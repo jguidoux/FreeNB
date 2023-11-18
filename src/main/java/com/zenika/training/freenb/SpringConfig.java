@@ -20,8 +20,8 @@ public class SpringConfig {
     }
 
     @Bean
-    public PublishOfferService publishOfferService(Offers offers, OfferPublisher publisher) {
-        return new PublishOfferService(offers, publisher);
+    public PublishOfferService publishOfferService(Offers offers, OfferPublisher publisher, Workspaces workspaces) {
+        return new PublishOfferService(offers, publisher, workspaces);
     }
 
     @Bean

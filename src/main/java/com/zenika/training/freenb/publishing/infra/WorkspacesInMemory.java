@@ -11,7 +11,7 @@ import java.util.Map;
 @Repository
 public class WorkspacesInMemory implements Workspaces {
 
-    private Map<IdWorkspace, Workspace> map = new HashMap<>();
+    private final Map<IdWorkspace, Workspace> map = new HashMap<>();
     @Override
     public Workspace findBy(IdWorkspace idWorkspace) {
         return map.get(idWorkspace);
@@ -21,5 +21,10 @@ public class WorkspacesInMemory implements Workspaces {
     public IdWorkspace create(Workspace newWorkspace) {
         map.put(newWorkspace.getId(), newWorkspace);
         return newWorkspace.getId();
+    }
+
+    @Override
+    public boolean exist(IdWorkspace aWorkspaceId) {
+        return map.containsKey(aWorkspaceId);
     }
 }

@@ -1,10 +1,14 @@
 package com.zenika.training.freenb;
 
 import com.zenika.training.freenb.publishing.api.PublishOfferRequest;
+import com.zenika.training.freenb.publishing.domain.IdWorkspace;
+import com.zenika.training.freenb.publishing.domain.Workspace;
+import com.zenika.training.freenb.publishing.domain.Workspaces;
 import com.zenika.training.freenb.reservation.application.SearchQuery;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
@@ -20,15 +24,18 @@ public class SearchOfferPublishIT {
     @LocalServerPort
     private Integer port;
 
+    @Autowired
+    Workspaces workspaces;
 
     @Test
     void should_find_corresponding_offer_when_offer_published() {
+        IdWorkspace idWorkspace = aWorkspaceExist();
 
         LocalDate start = LocalDate.of(2023, 11, 1);
         LocalDate end = LocalDate.of(2023, 11, 30);
 
         Response post = given().contentType(ContentType.JSON)
-                               .body(new PublishOfferRequest("1", start, end))
+                               .body(new PublishOfferRequest(idWorkspace.value(), start, end))
                                .when().post("http://localhost:" + port + "/v1/offers/publish");
 
         String[] location = post.header("location").split("/");
@@ -42,5 +49,12 @@ public class SearchOfferPublishIT {
 
         response.then().statusCode(HttpStatus.OK.value())
                 .body("correspondingOffers.id", hasItems(offerId));
+    }
+
+
+    private IdWorkspace aWorkspaceExist() {
+        Workspace newWorkspace = new Workspace(null, null);
+        workspaces.create(newWorkspace);
+        return newWorkspace.getId();
     }
 }
