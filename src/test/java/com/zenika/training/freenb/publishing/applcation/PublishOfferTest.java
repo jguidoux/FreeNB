@@ -22,13 +22,14 @@ public class PublishOfferTest {
     OfferPublisher publisher;
     WorkspacesInMemory workspaces;
 
+    Offers offers;
     @BeforeEach
     void setUp() {
         offerRepository = new OfferInMemory();
         publisher = Mockito.mock(OfferPublisher.class);
         workspaces = new WorkspacesInMemory();
-        publishOfferService = new PublishOfferService(offerRepository, publisher, new CheckWorkspaceRequirements(workspaces));
-
+        offers = new OfferInMemory();
+        publishOfferService = new PublishOfferService(offerRepository, publisher, new CheckWorkspaceRequirements(workspaces, offers));
     }
 
     @Test
@@ -85,7 +86,7 @@ public class PublishOfferTest {
     }
 
     @Test
-    void should_not_be_able_to_create_an_offer_capacity_superior_to_workspace_capacity() {
+    void should_not_be_able_to_create_an_offer_when_capacity_superior_to_workspace_capacity() {
 
         IdWorkspace myWorkspaceId = aWorkspaceExistWithCapacity(1);
         LocalDate start = LocalDate.of(2023, 11, 1);
@@ -98,6 +99,28 @@ public class PublishOfferTest {
                 .isInstanceOf(OfferCapacityOverloadWorkspaceCapacity.class);
 
     }
+
+    @Test
+    void should_not_be_able_to_create_an_offer_when_all_offers_capacity_are_superior_to_workspace_capacity() {
+
+        IdWorkspace myWorkspaceId = aWorkspaceExistWithCapacity(5);
+        offerOfCapacityIsPublished(myWorkspaceId, 1);
+        offerOfCapacityIsPublished(myWorkspaceId, 3);
+        LocalDate start = LocalDate.of(2023, 11, 1);
+        LocalDate end = LocalDate.of(2023, 11, 30);
+        OfferPeriod period = OfferPeriod.between(start, end);
+
+        // quand je veux publier une offre
+        // pour ce workspace
+        assertThatThrownBy(() -> publishOfferService.execute(myWorkspaceId, period, new Capacity(2)))
+                .isInstanceOf(OfferCapacityOverloadWorkspaceCapacity.class);
+
+    }
+
+    private void offerOfCapacityIsPublished(IdWorkspace idWorkspace, int capacity) {
+        offers.publish(new Offer(idWorkspace, new Capacity(capacity), null));
+    }
+
 
     private IdWorkspace aWorkspaceExistWithCapacity(int capacity) {
         Workspace newWorkspace = new Workspace(null, new Capacity(capacity));

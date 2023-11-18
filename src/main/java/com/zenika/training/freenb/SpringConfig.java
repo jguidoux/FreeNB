@@ -22,7 +22,7 @@ public class SpringConfig {
 
     @Bean
     public PublishOfferService publishOfferService(Offers offers, OfferPublisher publisher, Workspaces workspaces) {
-        return new PublishOfferService(offers, publisher, new CheckWorkspaceRequirements(workspaces));
+        return new PublishOfferService(offers, publisher, new CheckWorkspaceRequirements(workspaces, offers));
     }
 
     @Bean
