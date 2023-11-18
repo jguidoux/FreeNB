@@ -6,5 +6,4 @@ public interface Workspaces {
 
     IdWorkspace create(Workspace newWorkspace);
 
-    boolean exist(IdWorkspace aWorkspaceId);
 }

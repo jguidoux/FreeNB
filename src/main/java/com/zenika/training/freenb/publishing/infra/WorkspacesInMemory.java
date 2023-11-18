@@ -23,8 +23,4 @@ public class WorkspacesInMemory implements Workspaces {
         return newWorkspace.getId();
     }
 
-    @Override
-    public boolean exist(IdWorkspace aWorkspaceId) {
-        return map.containsKey(aWorkspaceId);
-    }
 }

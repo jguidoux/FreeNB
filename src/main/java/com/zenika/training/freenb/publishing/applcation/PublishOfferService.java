@@ -3,8 +3,6 @@ package com.zenika.training.freenb.publishing.applcation;
 import com.zenika.training.freenb.publishing.domain.*;
 import com.zenika.training.freenb.reservation.api.OfferPublished;
 
-import java.util.List;
-
 public class PublishOfferService {
     private final Offers offerRepository;
     private final OfferPublisher publisher;

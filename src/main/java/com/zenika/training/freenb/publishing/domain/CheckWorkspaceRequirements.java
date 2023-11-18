@@ -31,9 +31,10 @@ public class CheckWorkspaceRequirements {
 
     private Capacity sumAllExistingOffersCapacityFor(IdWorkspace aWorkspaceId) {
         List<Offer> offersOfWorkspace = offers.findOfferOfWorkspace(aWorkspaceId);
-        Capacity allOffersCapacity = offersOfWorkspace.stream().map(Offer::getCapacity).reduce((a, b) -> b.add(a))
-                                                      .orElse(Capacity.empty());
-        return allOffersCapacity;
+        return offersOfWorkspace.stream()
+                                .map(Offer::getCapacity)
+                                .reduce((a, b) -> b.add(a))
+                                .orElse(Capacity.empty());
     }
 
 }
