@@ -1,6 +1,7 @@
 package com.zenika.training.freenb;
 
 import com.zenika.training.freenb.publishing.api.PublishOfferRequest;
+import com.zenika.training.freenb.publishing.domain.Capacity;
 import com.zenika.training.freenb.publishing.domain.IdWorkspace;
 import com.zenika.training.freenb.publishing.domain.Workspace;
 import com.zenika.training.freenb.publishing.domain.Workspaces;
@@ -33,9 +34,10 @@ public class SearchOfferPublishIT {
 
         LocalDate start = LocalDate.of(2023, 11, 1);
         LocalDate end = LocalDate.of(2023, 11, 30);
+        int capacity = 2;
 
         Response post = given().contentType(ContentType.JSON)
-                               .body(new PublishOfferRequest(idWorkspace.value(), start, end))
+                               .body(new PublishOfferRequest(idWorkspace.value(), start, end, capacity))
                                .when().post("http://localhost:" + port + "/v1/offers/publish");
 
         String[] location = post.header("location").split("/");
@@ -53,7 +55,7 @@ public class SearchOfferPublishIT {
 
 
     private IdWorkspace aWorkspaceExist() {
-        Workspace newWorkspace = new Workspace(null, null);
+        Workspace newWorkspace = new Workspace(null, new Capacity(10));
         workspaces.create(newWorkspace);
         return newWorkspace.getId();
     }

@@ -2,6 +2,7 @@ package com.zenika.training.freenb;
 
 import com.zenika.training.freenb.publishing.applcation.PublishOfferService;
 import com.zenika.training.freenb.publishing.application.CreateWorkspaceService;
+import com.zenika.training.freenb.publishing.domain.CheckWorkspaceRequirements;
 import com.zenika.training.freenb.publishing.domain.OfferPublisher;
 import com.zenika.training.freenb.publishing.domain.Offers;
 import com.zenika.training.freenb.publishing.domain.Workspaces;
@@ -21,12 +22,12 @@ public class SpringConfig {
 
     @Bean
     public PublishOfferService publishOfferService(Offers offers, OfferPublisher publisher, Workspaces workspaces) {
-        return new PublishOfferService(offers, publisher, workspaces);
+        return new PublishOfferService(offers, publisher, new CheckWorkspaceRequirements(workspaces));
     }
 
     @Bean
-    public SearchCorrespondingOffers searchCorrespondingOffers(AvailableOffers availableOffes) {
-        return new SearchCorrespondingOffers(availableOffes);
+    public SearchCorrespondingOffers searchCorrespondingOffers(AvailableOffers availableOffers) {
+        return new SearchCorrespondingOffers(availableOffers);
     }
 
     @Bean

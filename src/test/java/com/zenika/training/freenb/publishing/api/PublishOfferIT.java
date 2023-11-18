@@ -35,10 +35,11 @@ public class PublishOfferIT {
 
         LocalDate start = LocalDate.of(2023, 11, 1);
         LocalDate end = LocalDate.of(2023, 11, 30);
+        int capacity = 2;
 
         Response response = given()
                 .contentType(ContentType.JSON)
-                .body(new PublishOfferRequest(idWorkspace.value(), start, end))
+                .body(new PublishOfferRequest(idWorkspace.value(), start, end, capacity))
                 .when().post("http://localhost:" + port + "/v1/offers/publish");
 
 
@@ -51,7 +52,7 @@ public class PublishOfferIT {
 
 
     private IdWorkspace aWorkspaceExist() {
-        Workspace newWorkspace = new Workspace(null, null);
+        Workspace newWorkspace = new Workspace(null, new Capacity(10));
         workspaces.create(newWorkspace);
         return newWorkspace.getId();
     }

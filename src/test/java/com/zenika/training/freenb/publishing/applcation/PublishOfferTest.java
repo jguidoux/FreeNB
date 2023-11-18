@@ -27,7 +27,7 @@ public class PublishOfferTest {
         offerRepository = new OfferInMemory();
         publisher = Mockito.mock(OfferPublisher.class);
         workspaces = new WorkspacesInMemory();
-        publishOfferService = new PublishOfferService(offerRepository, publisher, workspaces);
+        publishOfferService = new PublishOfferService(offerRepository, publisher, new CheckWorkspaceRequirements(workspaces));
 
     }
 
@@ -44,7 +44,7 @@ public class PublishOfferTest {
 
         // quand je veux publier une offre
         // pour ce workspace
-        IdOffer idOffer = publishOfferService.execute(myWorkspaceId, period);
+        IdOffer idOffer = publishOfferService.execute(myWorkspaceId, period, new Capacity(2));
 
         // alors une offre est publiée
         Offer offer = offerRepository.findById(idOffer);
@@ -62,7 +62,7 @@ public class PublishOfferTest {
 
         // quand je veux publier une offre
         // pour ce workspace
-        IdOffer idOffer = publishOfferService.execute(myWorkspaceId, period);
+        IdOffer idOffer = publishOfferService.execute(myWorkspaceId, period, new Capacity(2));
 
         // alors une offre est publiée
         Offer offer = offerRepository.findById(idOffer);
@@ -80,12 +80,34 @@ public class PublishOfferTest {
 
         // quand je veux publier une offre
         // pour ce workspace
-        assertThatThrownBy(() -> publishOfferService.execute(myWorkspaceId, period))
+        assertThatThrownBy(() -> publishOfferService.execute(myWorkspaceId, period, new Capacity(2)))
                 .isInstanceOf(WorkspaceDoesNotExist.class);
     }
 
+    @Test
+    void should_not_be_able_to_create_an_offer_capacity_superior_to_workspace_capacity() {
+
+        IdWorkspace myWorkspaceId = aWorkspaceExistWithCapacity(1);
+        LocalDate start = LocalDate.of(2023, 11, 1);
+        LocalDate end = LocalDate.of(2023, 11, 30);
+        OfferPeriod period = OfferPeriod.between(start, end);
+
+        // quand je veux publier une offre
+        // pour ce workspace
+        assertThatThrownBy(() -> publishOfferService.execute(myWorkspaceId, period, new Capacity(2)))
+                .isInstanceOf(OfferCapacityOverloadWorkspaceCapacity.class);
+
+    }
+
+    private IdWorkspace aWorkspaceExistWithCapacity(int capacity) {
+        Workspace newWorkspace = new Workspace(null, new Capacity(capacity));
+        workspaces.create(newWorkspace);
+        return newWorkspace.getId();
+
+    }
+
     private IdWorkspace aWorkspaceExist() {
-        Workspace newWorkspace = new Workspace(null, null);
+        Workspace newWorkspace = new Workspace(null, new Capacity(10));
         workspaces.create(newWorkspace);
         return newWorkspace.getId();
     }

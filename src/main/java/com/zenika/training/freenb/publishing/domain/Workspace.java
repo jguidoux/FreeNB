@@ -13,6 +13,10 @@ public class Workspace extends AggregateRoot<IdWorkspace> {
         this.capacity = capacity;
     }
 
+    public boolean isUpperToWorkspaceCapacity(Capacity capacity) {
+        return this.capacity.value() < capacity.value();
+    }
+
     public IdFreelanceHost getIdHost() {
         return idHost;
     }

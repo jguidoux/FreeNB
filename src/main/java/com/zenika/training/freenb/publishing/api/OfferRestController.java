@@ -22,7 +22,9 @@ public class OfferRestController {
 
     @PostMapping("publish")
     public ResponseEntity<String> createNewWorkspace(@RequestBody PublishOfferRequest request) {
-        IdOffer id = publishOfferService.execute(new IdWorkspace(request.workspaceId()), OfferPeriod.between(request.start(), request.end()));
+        IdOffer id = publishOfferService.execute(new IdWorkspace(request.workspaceId()),
+                OfferPeriod.between(request.start(), request.end()),
+                new Capacity(request.capacity()));
         return ResponseEntity.created(URI.create("/v1/offers/" + id.value())).build();
     }
 }
