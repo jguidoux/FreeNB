@@ -5,8 +5,7 @@ import com.zenika.training.shared.AggregateRoot;
 
 public class AvailableOffer extends AggregateRoot<OfferId> {
 
-
-    private final Seats availableSeats;
+    private Seats availableSeats;
 
     public AvailableOffer(OfferId offerId, Seats seats) {
         super(offerId);
@@ -18,6 +17,9 @@ public class AvailableOffer extends AggregateRoot<OfferId> {
     }
 
     public Reservation book() {
-        return new Reservation(id);
+        Reservation reservation = new Reservation(id);
+        availableSeats = availableSeats.decrement();
+        return reservation;
     }
+
 }
