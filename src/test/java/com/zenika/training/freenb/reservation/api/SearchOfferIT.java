@@ -4,6 +4,7 @@ import com.zenika.training.freenb.reservation.application.SearchQuery;
 import com.zenika.training.freenb.reservation.domain.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.AvailableOffers;
 import com.zenika.training.freenb.reservation.domain.OfferId;
+import com.zenika.training.freenb.reservation.domain.Seats;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,7 @@ public class SearchOfferIT {
     @Test
     void should_find_offers() {
         String offerId = UUID.randomUUID().toString();
-        AvailableOffer availableOffer = new AvailableOffer(new OfferId(offerId));
+        AvailableOffer availableOffer = new AvailableOffer(new OfferId(offerId), Seats.fromInt(2));
         repo.add(availableOffer);
 
         SearchQuery searchQuery = new SearchQuery();

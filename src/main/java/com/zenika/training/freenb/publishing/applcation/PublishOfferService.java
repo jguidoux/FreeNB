@@ -21,7 +21,7 @@ public class PublishOfferService {
 
         Offer offer = new Offer(aWorkspaceId, capacity, aPeriod);
         offerRepository.publish(offer);
-        publisher.publish(new OfferPublished(offer.getId().value()));
+        publisher.publish(new OfferPublished(offer.getId().value(), offer.getCapacity().value()));
         return offer.getId();
     }
 

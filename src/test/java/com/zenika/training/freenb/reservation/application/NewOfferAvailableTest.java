@@ -3,6 +3,7 @@ package com.zenika.training.freenb.reservation.application;
 import com.zenika.training.freenb.reservation.domain.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.AvailableOffers;
 import com.zenika.training.freenb.reservation.domain.OfferId;
+import com.zenika.training.freenb.reservation.domain.Seats;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ public class NewOfferAvailableTest {
 
         AvailableOffers availableOffers = new AvailableOffersInMemory();
         AddNewAvailableOffer service =new AddNewAvailableOffer(availableOffers);
-        AvailableOffer availableOffer = new AvailableOffer(new OfferId(UUID.randomUUID().toString()));
+        AvailableOffer availableOffer = new AvailableOffer(new OfferId(UUID.randomUUID().toString()), new Seats(2));
 
         service.execute(availableOffer);
 

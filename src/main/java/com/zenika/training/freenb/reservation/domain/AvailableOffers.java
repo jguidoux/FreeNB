@@ -9,4 +9,5 @@ public interface AvailableOffers {
 
     void add(AvailableOffer newAvailableOffer);
 
+    AvailableOffer findById(OfferId offerId);
 }

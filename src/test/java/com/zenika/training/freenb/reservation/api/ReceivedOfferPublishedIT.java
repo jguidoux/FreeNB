@@ -4,6 +4,7 @@ import com.zenika.training.freenb.reservation.application.AddNewAvailableOffer;
 import com.zenika.training.freenb.reservation.application.SearchQuery;
 import com.zenika.training.freenb.reservation.domain.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.OfferId;
+import com.zenika.training.freenb.reservation.domain.Seats;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ public class ReceivedOfferPublishedIT {
     @Test
     void should_insert_new_available_offer_from_published_offer() {
         String offerId = UUID.randomUUID().toString();
-        OfferPublished offerPublished = new OfferPublished(offerId);
+        OfferPublished offerPublished = new OfferPublished(offerId, 2);
 
         AvailableOffersInMemory repo = new AvailableOffersInMemory();
         AddNewAvailableOffer service = new AddNewAvailableOffer(repo);

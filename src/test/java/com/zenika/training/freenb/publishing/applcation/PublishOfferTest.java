@@ -68,7 +68,7 @@ public class PublishOfferTest {
         // alors une offre est publiée
         Offer offer = offerRepository.findById(idOffer);
         assertThat(offer.isPublished()).isTrue();
-        verify(publisher).publish(new OfferPublished(idOffer.value()));
+        verify(publisher).publish(new OfferPublished(idOffer.value(), offer.getCapacity().value()));
     }
 
     @Test
