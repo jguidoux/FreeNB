@@ -27,5 +27,14 @@ class BookAvailableOfferTest {
         assertThat(availableOffer.getAvailableSeats()).isEqualTo(Seats.fromInt(4));
     }
 
+    @Test
+    void new_reservation_status_should_not_be_in_approved_when_just_booked() {
+
+        AvailableOffer availableOffer = new AvailableOffer(OfferId.create(), Seats.fromInt(5));
+
+        availableOffer.book();
+
+        assertThat(availableOffer.isApproved()).isFalse();
+    }
 
 }

@@ -22,4 +22,7 @@ public class AvailableOffer extends AggregateRoot<OfferId> {
         return reservation;
     }
 
+    public boolean isApproved() {
+        return false;
+    }
 }
