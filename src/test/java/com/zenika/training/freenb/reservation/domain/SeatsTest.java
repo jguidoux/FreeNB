@@ -12,7 +12,7 @@ class SeatsTest {
 
         Seats decrementedSeats = seats.decrement();
 
-        assertThat(seats).isEqualTo(Seats.fromInt(1));
+        assertThat(decrementedSeats).isEqualTo(Seats.fromInt(1));
 
 
     }
@@ -22,9 +22,9 @@ class SeatsTest {
 
         Seats seats = Seats.fromInt(0);
 
-        boolean areAllOccupied = seats.areAllOccupied();
+        boolean areAllOccupied = seats.haveFreePlaces();
 
-        assertThat(areAllOccupied).isTrue();
+        assertThat(areAllOccupied).isFalse();
 
     }
 
@@ -33,9 +33,9 @@ class SeatsTest {
 
         Seats seats = Seats.fromInt(1);
 
-        boolean areAllOccupied = seats.areAllOccupied();
+        boolean areAllOccupied = seats.haveFreePlaces();
 
-        assertThat(areAllOccupied).isFalse();
+        assertThat(areAllOccupied).isTrue();
 
     }
 }

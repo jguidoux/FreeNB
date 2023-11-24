@@ -9,7 +9,7 @@ public record Seats(int count) {
         return new Seats(count() - 1);
     }
 
-    public boolean areAllOccupied() {
-        return count == 0;
+    public boolean haveFreePlaces() {
+        return count != 0;
     }
 }

@@ -20,10 +20,10 @@ public class NewOfferAvailableTest {
     void should_add_new_available_offer() {
 
         AvailableOffers availableOffers = new AvailableOffersInMemory();
-        AddNewAvailableOffer service =new AddNewAvailableOffer(availableOffers);
+        AddNewAvailableOffer addOfferService =new AddNewAvailableOffer(availableOffers);
         AvailableOffer availableOffer = new AvailableOffer(new OfferId(UUID.randomUUID().toString()), new Seats(2));
 
-        service.execute(availableOffer);
+        addOfferService.execute(availableOffer);
 
         List<AvailableOffer> foundOffers = availableOffers.search(new SearchQuery());
 

@@ -19,7 +19,7 @@ public class AvailableOffersInMemory implements AvailableOffers {
     @Override
     public List<AvailableOffer> search(SearchQuery searchQuery) {
         return new ArrayList<>(repo.values()).stream()
-                                             .filter(offer -> offer.getAvailableSeats().areAllOccupied())
+                                             .filter(offer -> offer.getAvailableSeats().haveFreePlaces())
                                              .toList();
     }
 
