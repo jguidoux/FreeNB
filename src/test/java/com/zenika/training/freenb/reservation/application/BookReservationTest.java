@@ -35,7 +35,7 @@ class BookReservationTest {
     @Test
     void new_reservation_should_be_saved() {
 
-        OfferId availableOfferId = existAvailableOfferWith(5);
+        OfferId availableOfferId = existAvailableOfferWith(2);
 
         Reservation reservation = service.execute(availableOfferId);
 

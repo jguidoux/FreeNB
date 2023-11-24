@@ -1,8 +1,9 @@
 package com.zenika.training.freenb.reservation.api;
 
-import com.zenika.training.freenb.reservation.application.Reservation;
-import com.zenika.training.freenb.reservation.application.SearchQuery;
-import com.zenika.training.freenb.reservation.domain.*;
+import com.zenika.training.freenb.reservation.domain.AvailableOffer;
+import com.zenika.training.freenb.reservation.domain.AvailableOffers;
+import com.zenika.training.freenb.reservation.domain.OfferId;
+import com.zenika.training.freenb.reservation.domain.Seats;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.hamcrest.text.IsEmptyString;
@@ -15,7 +16,7 @@ import org.springframework.http.HttpStatus;
 import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.not;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BookOfferIT {
@@ -32,11 +33,11 @@ class BookOfferIT {
         AvailableOffer availableOffer = new AvailableOffer(new OfferId(offerId), Seats.fromInt(2));
         availableOffers.add(availableOffer);
 
-        BookingRequest bookingRequest = new BookingRequest(offerId);
+        BookingRequest bookingRequest = new BookingRequest();
         Response response = given()
                 .contentType(ContentType.JSON)
                 .body(bookingRequest)
-                .when().post("http://localhost:" + port + "/v1/availableOffers/book");
+                .when().post("http://localhost:" + port + "/v1/availableOffers/" + offerId + "/book");
 
         response.then().statusCode(HttpStatus.OK.value())
                 .body("idReservation", not(IsEmptyString.emptyOrNullString()));
