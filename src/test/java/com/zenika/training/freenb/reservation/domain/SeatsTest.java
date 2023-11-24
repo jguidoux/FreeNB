@@ -38,4 +38,15 @@ class SeatsTest {
         assertThat(areAllOccupied).isTrue();
 
     }
+
+
+    @Test
+    void should_increment() {
+
+        Seats seats = Seats.fromInt(1);
+
+        Seats incremented = seats.increment();
+
+        assertThat(incremented).isEqualTo(Seats.fromInt(2));
+    }
 }

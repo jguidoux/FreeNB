@@ -12,4 +12,8 @@ public record Seats(int count) {
     public boolean haveFreePlaces() {
         return count != 0;
     }
+
+    public Seats increment() {
+        return new Seats(count + 1);
+    }
 }

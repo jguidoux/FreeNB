@@ -25,4 +25,8 @@ public class AvailableOffer extends AggregateRoot<OfferId> {
     public boolean isApproved() {
         return false;
     }
+
+    public void bookRefused() {
+        availableSeats = availableSeats.increment();
+    }
 }
