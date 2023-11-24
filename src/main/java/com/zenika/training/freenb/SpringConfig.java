@@ -7,8 +7,10 @@ import com.zenika.training.freenb.publishing.domain.OfferPublisher;
 import com.zenika.training.freenb.publishing.domain.Offers;
 import com.zenika.training.freenb.publishing.domain.Workspaces;
 import com.zenika.training.freenb.reservation.application.AddNewAvailableOffer;
+import com.zenika.training.freenb.reservation.application.BookReservationService;
 import com.zenika.training.freenb.reservation.application.SearchCorrespondingOffers;
 import com.zenika.training.freenb.reservation.domain.AvailableOffers;
+import com.zenika.training.freenb.reservation.domain.Reservations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,5 +35,10 @@ public class SpringConfig {
     @Bean
     public AddNewAvailableOffer addNewAvailableOffer(AvailableOffers availableOffers) {
         return new AddNewAvailableOffer(availableOffers);
+    }
+
+    @Bean
+    public BookReservationService bookReservationService(AvailableOffers availableOffers, Reservations reservations) {
+        return new BookReservationService(availableOffers, reservations);
     }
 }

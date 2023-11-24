@@ -12,7 +12,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ReceivedOfferPublishedIT {
+class ReceivedOfferPublishedIT {
 
     @Test
     void should_insert_new_available_offer_from_published_offer() {

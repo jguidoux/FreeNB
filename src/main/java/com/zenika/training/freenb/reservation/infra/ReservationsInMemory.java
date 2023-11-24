@@ -3,9 +3,11 @@ package com.zenika.training.freenb.reservation.infra;
 import com.zenika.training.freenb.reservation.application.Reservation;
 import com.zenika.training.freenb.reservation.application.ReservationId;
 import com.zenika.training.freenb.reservation.domain.Reservations;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
+@Repository
 
 public class ReservationsInMemory implements Reservations {
 
