@@ -1,15 +1,30 @@
 package com.zenika.training.freenb.reservation.application;
 
+import com.zenika.training.freenb.reservation.domain.AvailableOffer;
+import com.zenika.training.freenb.reservation.domain.CorrespondingOffer;
+import com.zenika.training.freenb.reservation.domain.OfferId;
+import com.zenika.training.freenb.reservation.domain.Seats;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
 import org.junit.jupiter.api.Test;
 
-public class SearchCorrespondingOfferTest {
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+class SearchCorrespondingOfferTest {
 
     @Test
     void should_find_some_corresponding_offers() {
 
-        SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(new AvailableOffersInMemory());
+        AvailableOffersInMemory repo = new AvailableOffersInMemory();
+        repo.add(new AvailableOffer(OfferId.create(), Seats.fromInt(3)));
+        SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(repo);
 
-        searchCorrespondingOffer.execute(new SearchQuery());
+
+        SearchQuery searchQuery = new SearchQuery();
+        List<CorrespondingOffer> offers = searchCorrespondingOffer.execute(searchQuery);
+
+        assertThat(offers).hasSize(1);
+
     }
 }
