@@ -8,4 +8,8 @@ public record Seats(int count) {
     Seats decrement() {
         return new Seats(count() - 1);
     }
+
+    public boolean areAllOccupied() {
+        return count == 0;
+    }
 }

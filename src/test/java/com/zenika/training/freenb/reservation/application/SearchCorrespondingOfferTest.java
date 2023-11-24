@@ -27,4 +27,19 @@ class SearchCorrespondingOfferTest {
         assertThat(offers).hasSize(1);
 
     }
+
+    @Test
+    void offer1_with_no_free_seats_cant_be_fins() {
+
+        AvailableOffersInMemory repo = new AvailableOffersInMemory();
+        repo.add(new AvailableOffer(OfferId.create(), Seats.fromInt(0)));
+        SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(repo);
+
+
+        SearchQuery searchQuery = new SearchQuery();
+        List<CorrespondingOffer> offers = searchCorrespondingOffer.execute(searchQuery);
+
+        assertThat(offers).isEmpty();
+
+    }
 }
