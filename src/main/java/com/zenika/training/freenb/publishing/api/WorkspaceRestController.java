@@ -1,10 +1,10 @@
 package com.zenika.training.freenb.publishing.api;
 
 import com.zenika.training.freenb.publishing.application.CreateWorkspaceService;
-import com.zenika.training.freenb.publishing.domain.Capacity;
+import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
 import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
-import com.zenika.training.freenb.publishing.domain.IdWorkspace;
-import com.zenika.training.freenb.publishing.domain.Workspace;
+import com.zenika.training.freenb.publishing.domain.workspace.IdWorkspace;
+import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

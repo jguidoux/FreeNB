@@ -1,9 +1,9 @@
 package com.zenika.training.freenb.publishing.infra;
 
-import com.zenika.training.freenb.publishing.domain.IdOffer;
-import com.zenika.training.freenb.publishing.domain.IdWorkspace;
-import com.zenika.training.freenb.publishing.domain.Offer;
-import com.zenika.training.freenb.publishing.domain.Offers;
+import com.zenika.training.freenb.publishing.domain.offer.IdOffer;
+import com.zenika.training.freenb.publishing.domain.workspace.IdWorkspace;
+import com.zenika.training.freenb.publishing.domain.offer.Offer;
+import com.zenika.training.freenb.publishing.domain.offer.Offers;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

@@ -1,7 +1,7 @@
 package com.zenika.training.freenb.publishing.api;
 
-import com.zenika.training.freenb.publishing.domain.Workspace;
-import com.zenika.training.freenb.publishing.domain.Workspaces;
+import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
+import com.zenika.training.freenb.publishing.domain.workspace.Workspaces;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class CreateWorkspaceIT {
+class CreateWorkspaceIT {
 
     @LocalServerPort
     private Integer port;

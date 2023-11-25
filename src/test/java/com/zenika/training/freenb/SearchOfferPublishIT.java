@@ -2,6 +2,10 @@ package com.zenika.training.freenb;
 
 import com.zenika.training.freenb.publishing.api.PublishOfferRequest;
 import com.zenika.training.freenb.publishing.domain.*;
+import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
+import com.zenika.training.freenb.publishing.domain.workspace.IdWorkspace;
+import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
+import com.zenika.training.freenb.publishing.domain.workspace.Workspaces;
 import com.zenika.training.freenb.reservation.domain.SearchQuery;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;

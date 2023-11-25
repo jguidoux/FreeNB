@@ -1,6 +1,6 @@
 package com.zenika.training.freenb.publishing.infra;
 
-import com.zenika.training.freenb.publishing.domain.OfferPublisher;
+import com.zenika.training.freenb.publishing.domain.offer.OfferPublisher;
 import com.zenika.training.freenb.reservation.api.OfferPublished;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;

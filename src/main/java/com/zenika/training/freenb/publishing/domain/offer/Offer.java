@@ -1,5 +1,7 @@
-package com.zenika.training.freenb.publishing.domain;
+package com.zenika.training.freenb.publishing.domain.offer;
 
+import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
+import com.zenika.training.freenb.publishing.domain.workspace.IdWorkspace;
 import com.zenika.training.shared.AggregateRoot;
 
 public class Offer extends AggregateRoot<IdOffer> {

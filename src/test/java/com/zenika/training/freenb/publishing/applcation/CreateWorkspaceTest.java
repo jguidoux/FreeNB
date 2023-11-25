@@ -2,6 +2,10 @@ package com.zenika.training.freenb.publishing.applcation;
 
 import com.zenika.training.freenb.publishing.application.CreateWorkspaceService;
 import com.zenika.training.freenb.publishing.domain.*;
+import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
+import com.zenika.training.freenb.publishing.domain.workspace.IdWorkspace;
+import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
+import com.zenika.training.freenb.publishing.domain.workspace.Workspaces;
 import com.zenika.training.freenb.publishing.infra.WorkspacesInMemory;
 import org.junit.jupiter.api.Test;
 

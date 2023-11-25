@@ -1,7 +1,10 @@
 package com.zenika.training.freenb.publishing.api;
 
 import com.zenika.training.freenb.publishing.applcation.PublishOfferService;
-import com.zenika.training.freenb.publishing.domain.*;
+import com.zenika.training.freenb.publishing.domain.offer.IdOffer;
+import com.zenika.training.freenb.publishing.domain.offer.OfferPeriod;
+import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
+import com.zenika.training.freenb.publishing.domain.workspace.IdWorkspace;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

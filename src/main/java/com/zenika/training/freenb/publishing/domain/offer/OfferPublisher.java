@@ -1,4 +1,4 @@
-package com.zenika.training.freenb.publishing.domain;
+package com.zenika.training.freenb.publishing.domain.offer;
 
 import com.zenika.training.freenb.reservation.api.OfferPublished;
 

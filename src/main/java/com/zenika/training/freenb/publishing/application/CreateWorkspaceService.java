@@ -1,8 +1,8 @@
 package com.zenika.training.freenb.publishing.application;
 
-import com.zenika.training.freenb.publishing.domain.IdWorkspace;
-import com.zenika.training.freenb.publishing.domain.Workspace;
-import com.zenika.training.freenb.publishing.domain.Workspaces;
+import com.zenika.training.freenb.publishing.domain.workspace.IdWorkspace;
+import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
+import com.zenika.training.freenb.publishing.domain.workspace.Workspaces;
 
 public class CreateWorkspaceService {
     private final Workspaces workspaceRepo;

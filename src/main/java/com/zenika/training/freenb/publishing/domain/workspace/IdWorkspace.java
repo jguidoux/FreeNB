@@ -1,4 +1,4 @@
-package com.zenika.training.freenb.publishing.domain;
+package com.zenika.training.freenb.publishing.domain.workspace;
 
 import java.util.UUID;
 

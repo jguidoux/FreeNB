@@ -21,6 +21,5 @@ public class ReservationRefusedService {
             availableOffer.bookRefused();
             this.availableOffers.update(availableOffer);
         }
-      
     }
 }

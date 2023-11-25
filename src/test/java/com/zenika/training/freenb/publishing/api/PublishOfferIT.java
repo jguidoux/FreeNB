@@ -1,6 +1,12 @@
 package com.zenika.training.freenb.publishing.api;
 
 import com.zenika.training.freenb.publishing.domain.*;
+import com.zenika.training.freenb.publishing.domain.offer.Offer;
+import com.zenika.training.freenb.publishing.domain.offer.Offers;
+import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
+import com.zenika.training.freenb.publishing.domain.workspace.IdWorkspace;
+import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
+import com.zenika.training.freenb.publishing.domain.workspace.Workspaces;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;

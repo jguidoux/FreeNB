@@ -1,6 +1,8 @@
 package com.zenika.training.freenb.publishing.applcation;
 
 import com.zenika.training.freenb.publishing.domain.*;
+import com.zenika.training.freenb.publishing.domain.offer.*;
+import com.zenika.training.freenb.publishing.domain.workspace.*;
 import com.zenika.training.freenb.publishing.infra.OfferInMemory;
 import com.zenika.training.freenb.publishing.infra.WorkspacesInMemory;
 import com.zenika.training.freenb.reservation.api.OfferPublished;
@@ -34,7 +36,7 @@ public class PublishOfferTest {
     }
 
     @Test
-    public void should_publish_offer() {
+    void should_publish_offer() {
 
         // étant donné un workspace
         // et une période

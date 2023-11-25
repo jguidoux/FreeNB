@@ -1,6 +1,8 @@
-package com.zenika.training.freenb.publishing.domain;
+package com.zenika.training.freenb.publishing.domain.workspace;
 
 import com.zenika.training.freenb.publishing.applcation.OfferCapacityOverloadWorkspaceCapacity;
+import com.zenika.training.freenb.publishing.domain.offer.Offer;
+import com.zenika.training.freenb.publishing.domain.offer.Offers;
 
 import java.util.List;
 

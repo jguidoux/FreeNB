@@ -1,5 +1,8 @@
-package com.zenika.training.freenb.publishing.domain;
+package com.zenika.training.freenb.publishing.domain.workspace;
 
+import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
+import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
+import com.zenika.training.freenb.publishing.domain.workspace.IdWorkspace;
 import com.zenika.training.shared.AggregateRoot;
 
 public class Workspace extends AggregateRoot<IdWorkspace> {

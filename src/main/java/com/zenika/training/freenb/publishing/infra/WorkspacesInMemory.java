@@ -1,8 +1,8 @@
 package com.zenika.training.freenb.publishing.infra;
 
-import com.zenika.training.freenb.publishing.domain.IdWorkspace;
-import com.zenika.training.freenb.publishing.domain.Workspace;
-import com.zenika.training.freenb.publishing.domain.Workspaces;
+import com.zenika.training.freenb.publishing.domain.workspace.IdWorkspace;
+import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
+import com.zenika.training.freenb.publishing.domain.workspace.Workspaces;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
