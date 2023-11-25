@@ -4,6 +4,9 @@ import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
 import com.zenika.training.freenb.publishing.domain.workspace.WorkspaceId;
 import com.zenika.training.shared.AggregateRoot;
 
+import java.time.LocalDate;
+import java.util.List;
+
 public class Offer extends AggregateRoot<OfferId> {
     private final WorkspaceId workspaceId;
 
@@ -31,5 +34,9 @@ public class Offer extends AggregateRoot<OfferId> {
 
     public WorkspaceId getWorkspaceId() {
         return this.workspaceId;
+    }
+
+    public List<LocalDate> getListOfDays() {
+        return aPeriod.listOfDays();
     }
 }

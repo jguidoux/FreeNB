@@ -7,6 +7,9 @@ import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
 import com.zenika.training.freenb.publishing.domain.workspace.WorkspaceId;
 import com.zenika.training.freenb.reservation.api.OfferPublished;
 
+import java.time.LocalDate;
+import java.util.List;
+
 public class PublishOfferService {
     private final Offers offerRepository;
     private final OfferPublisher publisher;
@@ -25,8 +28,9 @@ public class PublishOfferService {
 
         Offer offer = new Offer(aWorkspaceId, capacity, aPeriod);
         offerRepository.publish(offer);
+        List<LocalDate> days = offer.getListOfDays();
         publisher.publish(new OfferPublished(workspace.getIdHost().value(), offer.getId().value(), offer.getCapacity()
-                                                                                                        .value()));
+                                                                                                        .value(), days));
         return offer.getId();
     }
 

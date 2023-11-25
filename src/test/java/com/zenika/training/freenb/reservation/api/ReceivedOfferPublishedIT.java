@@ -18,7 +18,7 @@ class ReceivedOfferPublishedIT {
     void should_insert_new_available_offer_from_published_offer() {
         String offerId = UUID.randomUUID().toString();
         String hostId = UUID.randomUUID().toString();
-        OfferPublished offerPublished = new OfferPublished(hostId, offerId, 2);
+        OfferPublished offerPublished = new OfferPublished(hostId, offerId, 2, List.of());
 
         AvailableOffersInMemory repo = new AvailableOffersInMemory();
         AddNewAvailableOffer service = new AddNewAvailableOffer(repo);

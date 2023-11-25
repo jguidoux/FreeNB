@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -72,7 +73,9 @@ public class PublishOfferTest {
         // alors une offre est publiée
         Offer offer = offerRepository.findById(idOffer);
         assertThat(offer.isPublished()).isTrue();
-        verify(publisher).publish(new OfferPublished(HOST.value(), idOffer.value(), offer.getCapacity().value()));
+        List<LocalDate> planning = period.listOfDays();
+        verify(publisher).publish(new OfferPublished(HOST.value(), idOffer.value(), offer.getCapacity()
+                                                                                         .value(), planning));
     }
 
     @Test
