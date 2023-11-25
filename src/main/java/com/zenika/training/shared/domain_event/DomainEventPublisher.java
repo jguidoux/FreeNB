@@ -1,6 +1,7 @@
 package com.zenika.training.shared.domain_event;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,7 +17,10 @@ public class DomainEventPublisher {
         if (handlers != null) {
             DomainEventPublisher.handlersMap.get(domainEventName).add(subscriber);
         } else {
-            DomainEventPublisher.handlersMap.put(domainEventName, List.of(subscriber));
+
+            List<EventHandler> subscribers = new ArrayList<>();
+            subscribers.add(subscriber);
+            DomainEventPublisher.handlersMap.put(domainEventName, subscribers);
         }
 
     }

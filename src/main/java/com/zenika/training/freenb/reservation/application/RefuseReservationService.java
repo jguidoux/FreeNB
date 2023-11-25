@@ -1,26 +1,24 @@
 package com.zenika.training.freenb.reservation.application;
 
 import com.zenika.training.freenb.reservation.domain.*;
+import com.zenika.training.shared.domain_event.DomainEventPublisher;
 
 public class RefuseReservationService {
 
     private final Reservations reservations;
 
-    private final ReservationRefusedService reservationRefusedService;
-
-    public RefuseReservationService(Reservations reservations, ReservationRefusedService reservationRefusedService) {
+    public RefuseReservationService(Reservations reservations) {
         this.reservations = reservations;
-        this.reservationRefusedService = reservationRefusedService;
     }
 
     public void execute(RefuseReservationCommand request) {
         Reservation reservation = reservations.findById(request.reservationId());
 
-        ReservationRefused event = reservation.refused(request.host());
+        reservation.refused(request.host());
         this.reservations.save(reservation);
+        reservation.pullDomainEvents()
+                   .forEach(DomainEventPublisher::dispatch);
 
-
-        reservationRefusedService.reservationRefused(event);
     }
 
 }

@@ -8,7 +8,9 @@ import com.zenika.training.freenb.publishing.domain.Offers;
 import com.zenika.training.freenb.publishing.domain.Workspaces;
 import com.zenika.training.freenb.reservation.application.*;
 import com.zenika.training.freenb.reservation.domain.AvailableOffers;
+import com.zenika.training.freenb.reservation.domain.ReservationRefused;
 import com.zenika.training.freenb.reservation.domain.Reservations;
+import com.zenika.training.shared.domain_event.DomainEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -42,11 +44,13 @@ public class SpringConfig {
 
     @Bean
     public RefuseReservationService reservationService(Reservations reservation, ReservationRefusedService reservationRefusedService) {
-        return new RefuseReservationService(reservation, reservationRefusedService);
+        return new RefuseReservationService(reservation);
     }
 
     @Bean
     public ReservationRefusedService reservationRefusedService(AvailableOffers availableOffers) {
-        return new ReservationRefusedService(availableOffers);
+        ReservationRefusedService reservationRefusedService = new ReservationRefusedService(availableOffers);
+        DomainEventPublisher.register(reservationRefusedService::execute, ReservationRefused.class.getCanonicalName());
+        return reservationRefusedService;
     }
 }

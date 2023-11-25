@@ -4,6 +4,7 @@ import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
 import com.zenika.training.freenb.reservation.domain.*;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
 import com.zenika.training.freenb.reservation.infra.ReservationsInMemory;
+import com.zenika.training.shared.domain_event.DomainEventPublisher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +26,7 @@ class RefusedReservationTest {
         reservations = new ReservationsInMemory();
         bookReservationService = new BookReservationService(availableOffers, reservations);
 
+        DomainEventPublisher.register(evt -> new ReservationRefusedService(availableOffers).execute(evt), ReservationRefused.class.getCanonicalName());
     }
 
     @Test
@@ -43,7 +45,7 @@ class RefusedReservationTest {
 
         Reservation reservation = bookReservationService.execute(offerId);
         ReservationId reservationId = reservation.getId();
-        RefuseReservationService refusedReservationService = new RefuseReservationService(reservations, new ReservationRefusedService(availableOffers));
+        RefuseReservationService refusedReservationService = new RefuseReservationService(reservations);
 
         RefuseReservationCommand refuseOfferRequest = new RefuseReservationCommand(reservationId, HOST);
         refusedReservationService.execute(refuseOfferRequest);
@@ -59,7 +61,7 @@ class RefusedReservationTest {
 
         Reservation reservation = bookReservationService.execute(offerId);
         ReservationId reservationId = reservation.getId();
-        RefuseReservationService refusedReservationService = new RefuseReservationService(reservations, new ReservationRefusedService(availableOffers));
+        RefuseReservationService refusedReservationService = new RefuseReservationService(reservations);
 
         RefuseReservationCommand refuseOfferRequest = new RefuseReservationCommand(reservationId, HOST);
         refusedReservationService.execute(refuseOfferRequest);
