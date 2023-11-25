@@ -1,7 +1,7 @@
 package com.zenika.training.freenb.reservation.api;
 
 import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
-import com.zenika.training.freenb.reservation.application.RefusedReservationService;
+import com.zenika.training.freenb.reservation.application.RefuseReservationService;
 import com.zenika.training.freenb.reservation.domain.ReservationId;
 import com.zenika.training.freenb.reservation.domain.RefuseReservationCommand;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/reservation/")
 public class ReservationController {
 
-    private final RefusedReservationService bookingService;
+    private final RefuseReservationService bookingService;
 
-    public ReservationController(RefusedReservationService bookingService) {
+    public ReservationController(RefuseReservationService bookingService) {
         this.bookingService = bookingService;
     }
 

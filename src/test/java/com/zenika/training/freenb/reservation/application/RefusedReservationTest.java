@@ -43,7 +43,7 @@ class RefusedReservationTest {
 
         Reservation reservation = bookReservationService.execute(offerId);
         ReservationId reservationId = reservation.getId();
-        RefusedReservationService refusedReservationService = new RefusedReservationService((reservations), availableOffers);
+        RefuseReservationService refusedReservationService = new RefuseReservationService(reservations, new ReservationRefusedService(availableOffers));
 
         RefuseReservationCommand refuseOfferRequest = new RefuseReservationCommand(reservationId, HOST);
         refusedReservationService.execute(refuseOfferRequest);
@@ -59,7 +59,7 @@ class RefusedReservationTest {
 
         Reservation reservation = bookReservationService.execute(offerId);
         ReservationId reservationId = reservation.getId();
-        RefusedReservationService refusedReservationService = new RefusedReservationService(reservations, availableOffers);
+        RefuseReservationService refusedReservationService = new RefuseReservationService(reservations, new ReservationRefusedService(availableOffers));
 
         RefuseReservationCommand refuseOfferRequest = new RefuseReservationCommand(reservationId, HOST);
         refusedReservationService.execute(refuseOfferRequest);
