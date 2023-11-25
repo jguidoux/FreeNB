@@ -1,5 +1,6 @@
 package com.zenika.training.freenb.reservation.api;
 
+import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
 import com.zenika.training.freenb.reservation.domain.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.AvailableOffers;
 import com.zenika.training.freenb.reservation.domain.OfferId;
@@ -21,6 +22,7 @@ import static org.hamcrest.Matchers.not;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BookOfferIT {
 
+    public static final IdFreelanceHost HOST = IdFreelanceHost.create();
     @LocalServerPort
     private Integer port;
 
@@ -30,7 +32,7 @@ class BookOfferIT {
     @Test
     void should_find_offers() {
         String offerId = UUID.randomUUID().toString();
-        AvailableOffer availableOffer = new AvailableOffer(new OfferId(offerId), Seats.fromInt(2));
+        AvailableOffer availableOffer = new AvailableOffer(HOST, new OfferId(offerId), Seats.fromInt(2));
         availableOffers.add(availableOffer);
 
         BookingRequest bookingRequest = new BookingRequest();

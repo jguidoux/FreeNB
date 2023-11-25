@@ -1,8 +1,9 @@
 package com.zenika.training.freenb.reservation.api;
 
+import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
 import com.zenika.training.freenb.reservation.application.AddNewAvailableOffer;
 import com.zenika.training.freenb.reservation.application.BookReservationService;
-import com.zenika.training.freenb.reservation.application.ReservationId;
+import com.zenika.training.freenb.reservation.domain.ReservationId;
 import com.zenika.training.freenb.reservation.domain.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.OfferId;
 import com.zenika.training.freenb.reservation.domain.Seats;
@@ -21,6 +22,9 @@ import static io.restassured.RestAssured.given;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ReservationIT {
 
+    public static final IdFreelanceHost HOST = IdFreelanceHost.create();
+    public static final OfferId OFFER_ID = new OfferId(UUID.randomUUID().toString());
+
     @LocalServerPort
     private Integer port;
 
@@ -31,16 +35,15 @@ class ReservationIT {
     BookReservationService reservationService;
 
     @Test
-    void should_find_offers() {
-        OfferId offerId1 = new OfferId(UUID.randomUUID().toString());
-        AvailableOffer availableOffer = new AvailableOffer(offerId1, Seats.fromInt(2));
+    void should_refuse_offer() {
+        AvailableOffer availableOffer = new AvailableOffer(HOST, OFFER_ID, Seats.fromInt(2));
         addOffersService.execute(availableOffer);
-        ReservationId reservationId = reservationService.execute(offerId1).getId();
+        ReservationId reservationId = reservationService.execute(OFFER_ID).getId();
 
-        BookingRequest bookingRequest = new BookingRequest();
+        RefuseRequest request = new RefuseRequest(HOST.value());
         Response response = given()
                 .contentType(ContentType.JSON)
-                .body(bookingRequest)
+                .body(request)
                 .when().post("http://localhost:" + port + "/v1/reservation/" + reservationId.value() + "/refused");
 
         response.then().statusCode(HttpStatus.NO_CONTENT.value());

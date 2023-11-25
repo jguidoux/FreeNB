@@ -17,11 +17,11 @@ public class PublishOfferService {
 
     public IdOffer execute(IdWorkspace aWorkspaceId, OfferPeriod aPeriod, Capacity capacity) {
 
-        checkWorkspaceRequirements.checkWorkspaceRequirements(aWorkspaceId, capacity);
+        Workspace workspace = checkWorkspaceRequirements.checkWorkspaceRequirements(aWorkspaceId, capacity);
 
         Offer offer = new Offer(aWorkspaceId, capacity, aPeriod);
         offerRepository.publish(offer);
-        publisher.publish(new OfferPublished(offer.getId().value(), offer.getCapacity().value()));
+        publisher.publish(new OfferPublished(workspace.getIdHost().value(), offer.getId().value(), offer.getCapacity().value()));
         return offer.getId();
     }
 

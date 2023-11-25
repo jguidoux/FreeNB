@@ -1,11 +1,8 @@
 package com.zenika.training.freenb;
 
 import com.zenika.training.freenb.publishing.api.PublishOfferRequest;
-import com.zenika.training.freenb.publishing.domain.Capacity;
-import com.zenika.training.freenb.publishing.domain.IdWorkspace;
-import com.zenika.training.freenb.publishing.domain.Workspace;
-import com.zenika.training.freenb.publishing.domain.Workspaces;
-import com.zenika.training.freenb.reservation.application.SearchQuery;
+import com.zenika.training.freenb.publishing.domain.*;
+import com.zenika.training.freenb.reservation.domain.SearchQuery;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
@@ -22,6 +19,7 @@ import static org.hamcrest.Matchers.hasItems;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SearchOfferPublishIT {
 
+    public static final IdFreelanceHost HOST = IdFreelanceHost.create();
     @LocalServerPort
     private Integer port;
 
@@ -55,7 +53,7 @@ public class SearchOfferPublishIT {
 
 
     private IdWorkspace aWorkspaceExist() {
-        Workspace newWorkspace = new Workspace(null, new Capacity(10));
+        Workspace newWorkspace = new Workspace(HOST, new Capacity(10));
         workspaces.create(newWorkspace);
         return newWorkspace.getId();
     }

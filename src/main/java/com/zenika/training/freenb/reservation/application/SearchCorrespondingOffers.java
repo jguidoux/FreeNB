@@ -2,6 +2,7 @@ package com.zenika.training.freenb.reservation.application;
 
 import com.zenika.training.freenb.reservation.domain.AvailableOffers;
 import com.zenika.training.freenb.reservation.domain.CorrespondingOffer;
+import com.zenika.training.freenb.reservation.domain.SearchQuery;
 
 import java.util.List;
 

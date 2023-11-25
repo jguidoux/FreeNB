@@ -1,6 +1,7 @@
 package com.zenika.training.freenb.reservation.api;
 
-import com.zenika.training.freenb.reservation.application.SearchQuery;
+import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
+import com.zenika.training.freenb.reservation.domain.SearchQuery;
 import com.zenika.training.freenb.reservation.domain.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.AvailableOffers;
 import com.zenika.training.freenb.reservation.domain.OfferId;
@@ -19,8 +20,9 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasItems;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class SearchOfferIT {
+class SearchOfferIT {
 
+    public static final IdFreelanceHost HOST = IdFreelanceHost.create();
     @LocalServerPort
     private Integer port;
 
@@ -30,7 +32,7 @@ public class SearchOfferIT {
     @Test
     void should_find_offers() {
         String offerId = UUID.randomUUID().toString();
-        AvailableOffer availableOffer = new AvailableOffer(new OfferId(offerId), Seats.fromInt(2));
+        AvailableOffer availableOffer = new AvailableOffer(HOST, new OfferId(offerId), Seats.fromInt(2));
         repo.add(availableOffer);
 
         SearchQuery searchQuery = new SearchQuery();

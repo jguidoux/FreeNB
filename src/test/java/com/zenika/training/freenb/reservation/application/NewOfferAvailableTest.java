@@ -1,9 +1,7 @@
 package com.zenika.training.freenb.reservation.application;
 
-import com.zenika.training.freenb.reservation.domain.AvailableOffer;
-import com.zenika.training.freenb.reservation.domain.AvailableOffers;
-import com.zenika.training.freenb.reservation.domain.OfferId;
-import com.zenika.training.freenb.reservation.domain.Seats;
+import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
+import com.zenika.training.freenb.reservation.domain.*;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
 import org.junit.jupiter.api.Test;
 
@@ -16,12 +14,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class NewOfferAvailableTest {
 
 
+    public static final IdFreelanceHost HOST = IdFreelanceHost.create();
+
     @Test
     void should_add_new_available_offer() {
 
         AvailableOffers availableOffers = new AvailableOffersInMemory();
         AddNewAvailableOffer addOfferService =new AddNewAvailableOffer(availableOffers);
-        AvailableOffer availableOffer = new AvailableOffer(new OfferId(UUID.randomUUID().toString()), new Seats(2));
+        AvailableOffer availableOffer = new AvailableOffer(HOST, new OfferId(UUID.randomUUID().toString()), new Seats(2));
 
         addOfferService.execute(availableOffer);
 

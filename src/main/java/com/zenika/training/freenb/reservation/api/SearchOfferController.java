@@ -1,9 +1,9 @@
 package com.zenika.training.freenb.reservation.api;
 
 import com.zenika.training.freenb.reservation.application.BookReservationService;
-import com.zenika.training.freenb.reservation.application.Reservation;
+import com.zenika.training.freenb.reservation.domain.Reservation;
 import com.zenika.training.freenb.reservation.application.SearchCorrespondingOffers;
-import com.zenika.training.freenb.reservation.application.SearchQuery;
+import com.zenika.training.freenb.reservation.domain.SearchQuery;
 import com.zenika.training.freenb.reservation.domain.OfferId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

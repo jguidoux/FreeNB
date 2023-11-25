@@ -1,8 +1,6 @@
 package com.zenika.training.freenb.reservation.application;
 
-import com.zenika.training.freenb.reservation.domain.AvailableOffer;
-import com.zenika.training.freenb.reservation.domain.AvailableOffers;
-import com.zenika.training.freenb.reservation.domain.Reservations;
+import com.zenika.training.freenb.reservation.domain.*;
 
 public class RefusedReservationService {
 
@@ -15,14 +13,14 @@ public class RefusedReservationService {
         this.availableOffers = availableOffers;
     }
 
-    public void execute(ReservationId id) {
-        Reservation reservation = reservations.findById(id);
+    public void execute(RefuseReservationCommand request) {
+        Reservation reservation = reservations.findById(request.reservationId());
 
-        reservation.refused();
+        reservation.refused(request.host());
         this.reservations.save(reservation);
 
 
-        AvailableOffer availableOffer = availableOffers.findById(reservation.offerId());
+        AvailableOffer availableOffer = availableOffers.findById(reservation.getOfferId());
         availableOffer.bookRefused();
 
         availableOffers.update(availableOffer);

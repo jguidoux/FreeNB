@@ -14,7 +14,7 @@ public class CheckWorkspaceRequirements {
         this.offers = offers;
     }
 
-    public void checkWorkspaceRequirements(IdWorkspace aWorkspaceId, Capacity newOfferCapacity) {
+    public Workspace checkWorkspaceRequirements(IdWorkspace aWorkspaceId, Capacity newOfferCapacity) {
         Workspace existingWorkspace = this.workspaces.findBy(aWorkspaceId);
         if (existingWorkspace == null) {
             throw new WorkspaceDoesNotExist();
@@ -27,6 +27,7 @@ public class CheckWorkspaceRequirements {
         }
 
 
+        return existingWorkspace;
     }
 
     private Capacity sumAllExistingOffersCapacityFor(IdWorkspace aWorkspaceId) {

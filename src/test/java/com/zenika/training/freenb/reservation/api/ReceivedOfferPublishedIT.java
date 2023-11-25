@@ -1,7 +1,7 @@
 package com.zenika.training.freenb.reservation.api;
 
 import com.zenika.training.freenb.reservation.application.AddNewAvailableOffer;
-import com.zenika.training.freenb.reservation.application.SearchQuery;
+import com.zenika.training.freenb.reservation.domain.SearchQuery;
 import com.zenika.training.freenb.reservation.domain.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.OfferId;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
@@ -17,7 +17,8 @@ class ReceivedOfferPublishedIT {
     @Test
     void should_insert_new_available_offer_from_published_offer() {
         String offerId = UUID.randomUUID().toString();
-        OfferPublished offerPublished = new OfferPublished(offerId, 2);
+        String hostId = UUID.randomUUID().toString();
+        OfferPublished offerPublished = new OfferPublished(hostId, offerId, 2);
 
         AvailableOffersInMemory repo = new AvailableOffersInMemory();
         AddNewAvailableOffer service = new AddNewAvailableOffer(repo);

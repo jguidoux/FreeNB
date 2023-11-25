@@ -1,7 +1,7 @@
 package com.zenika.training.freenb.reservation.infra;
 
-import com.zenika.training.freenb.reservation.application.Reservation;
-import com.zenika.training.freenb.reservation.application.ReservationId;
+import com.zenika.training.freenb.reservation.domain.Reservation;
+import com.zenika.training.freenb.reservation.domain.ReservationId;
 import com.zenika.training.freenb.reservation.domain.Reservations;
 import org.springframework.stereotype.Repository;
 

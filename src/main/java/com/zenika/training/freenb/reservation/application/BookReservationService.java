@@ -1,9 +1,6 @@
 package com.zenika.training.freenb.reservation.application;
 
-import com.zenika.training.freenb.reservation.domain.AvailableOffer;
-import com.zenika.training.freenb.reservation.domain.AvailableOffers;
-import com.zenika.training.freenb.reservation.domain.OfferId;
-import com.zenika.training.freenb.reservation.domain.Reservations;
+import com.zenika.training.freenb.reservation.domain.*;
 
 public class BookReservationService {
     private final AvailableOffers repo;

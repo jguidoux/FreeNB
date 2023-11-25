@@ -20,6 +20,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class PublishOfferIT {
 
+    public static final IdFreelanceHost HOST = IdFreelanceHost.create();
     @LocalServerPort
     private Integer port;
 
@@ -52,7 +53,7 @@ public class PublishOfferIT {
 
 
     private IdWorkspace aWorkspaceExist() {
-        Workspace newWorkspace = new Workspace(null, new Capacity(10));
+        Workspace newWorkspace = new Workspace(HOST, new Capacity(10));
         workspaces.create(newWorkspace);
         return newWorkspace.getId();
     }

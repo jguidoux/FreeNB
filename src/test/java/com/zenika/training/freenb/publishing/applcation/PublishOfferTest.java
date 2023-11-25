@@ -17,6 +17,7 @@ import static org.mockito.Mockito.verify;
 public class PublishOfferTest {
 
 
+    public static final IdFreelanceHost HOST = IdFreelanceHost.create();
     PublishOfferService publishOfferService;
     Offers offerRepository;
     OfferPublisher publisher;
@@ -68,7 +69,7 @@ public class PublishOfferTest {
         // alors une offre est publiée
         Offer offer = offerRepository.findById(idOffer);
         assertThat(offer.isPublished()).isTrue();
-        verify(publisher).publish(new OfferPublished(idOffer.value(), offer.getCapacity().value()));
+        verify(publisher).publish(new OfferPublished(HOST.value(), idOffer.value(), offer.getCapacity().value()));
     }
 
     @Test
@@ -130,7 +131,7 @@ public class PublishOfferTest {
     }
 
     private IdWorkspace aWorkspaceExist() {
-        Workspace newWorkspace = new Workspace(null, new Capacity(10));
+        Workspace newWorkspace = new Workspace(HOST, new Capacity(10));
         workspaces.create(newWorkspace);
         return newWorkspace.getId();
     }
