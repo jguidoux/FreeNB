@@ -3,16 +3,12 @@ package com.zenika.training.freenb.reservation.domain.reservation;
 import com.zenika.training.freenb.reservation.domain.HostId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
 import com.zenika.training.shared.AggregateRoot;
-import lombok.Getter;
 
 
 public class Reservation extends AggregateRoot<ReservationId> {
 
-    @Getter
     private final OfferId offerId;
-    @Getter
     private final HostId host;
-    @Getter
     private ReservationStatus status;
 
 
@@ -34,4 +30,15 @@ public class Reservation extends AggregateRoot<ReservationId> {
     }
 
 
+    public OfferId getOfferId() {
+        return this.offerId;
+    }
+
+    public ReservationStatus getStatus() {
+        return this.status;
+    }
+
+    public HostId getHost() {
+        return this.host;
+    }
 }
