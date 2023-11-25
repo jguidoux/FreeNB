@@ -2,8 +2,8 @@ package com.zenika.training.freenb.publishing.api;
 
 import com.zenika.training.freenb.publishing.application.CreateWorkspaceService;
 import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
-import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
-import com.zenika.training.freenb.publishing.domain.workspace.IdWorkspace;
+import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
+import com.zenika.training.freenb.publishing.domain.workspace.WorkspaceId;
 import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +25,7 @@ public class WorkspaceRestController {
 
     @PostMapping
     public ResponseEntity<String> createNewWorkspace(@RequestBody WorkspaceRequest request) {
-        IdWorkspace id = createWorkspaceService.execute(new Workspace(new IdFreelanceHost(request.hostId()), new Capacity(request.capacity())));
+        WorkspaceId id = createWorkspaceService.execute(new Workspace(new FreelanceHostId(request.hostId()), new Capacity(request.capacity())));
         return ResponseEntity.created(URI.create("/v1/workspaces/" + id.value())).build();
     }
 }

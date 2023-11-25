@@ -1,6 +1,6 @@
 package com.zenika.training.freenb.reservation.domain;
 
-import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
+import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.shared.AggregateRoot;
 import lombok.Getter;
 
@@ -13,10 +13,10 @@ public class Reservation extends AggregateRoot<ReservationId> {
     @Getter
     private ReservationStatus status;
     @Getter
-    private final IdFreelanceHost host;
+    private final FreelanceHostId host;
 
 
-    public Reservation(OfferId offerId, IdFreelanceHost host) {
+    public Reservation(OfferId offerId, FreelanceHostId host) {
         super(ReservationId.create());
         this.offerId = offerId;
         this.host = host;
@@ -26,7 +26,7 @@ public class Reservation extends AggregateRoot<ReservationId> {
 
 
 
-    public void refused(IdFreelanceHost refuser) {
+    public void refused(FreelanceHostId refuser) {
         if (!refuser.equals(this.host)) {
             throw new NotAuthorizeToRefuseReservation();
         }

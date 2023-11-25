@@ -1,13 +1,13 @@
 package com.zenika.training.freenb.reservation.domain;
 
-import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
+import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class BookAvailableOfferTest {
 
-    public static final IdFreelanceHost HOST = IdFreelanceHost.create();
+    public static final FreelanceHostId HOST = FreelanceHostId.create();
 
     @Test
     void should_book_a_reservation() {

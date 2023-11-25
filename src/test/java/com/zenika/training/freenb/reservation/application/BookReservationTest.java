@@ -1,6 +1,6 @@
 package com.zenika.training.freenb.reservation.application;
 
-import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
+import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.freenb.reservation.domain.*;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
 import com.zenika.training.freenb.reservation.infra.ReservationsInMemory;
@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class BookReservationTest {
 
-    public static final IdFreelanceHost HOST = IdFreelanceHost.create();
+    public static final FreelanceHostId HOST = FreelanceHostId.create();
     private AvailableOffers availableOffers;
     private Reservations reservations;
     private BookReservationService service;

@@ -1,6 +1,6 @@
 package com.zenika.training.freenb.reservation.api;
 
-import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
+import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.freenb.reservation.domain.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.AvailableOffers;
 import com.zenika.training.freenb.reservation.domain.OfferId;
@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.not;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BookOfferIT {
 
-    public static final IdFreelanceHost HOST = IdFreelanceHost.create();
+    public static final FreelanceHostId HOST = FreelanceHostId.create();
     @LocalServerPort
     private Integer port;
 

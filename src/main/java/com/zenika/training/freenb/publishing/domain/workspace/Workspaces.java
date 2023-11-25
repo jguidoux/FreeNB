@@ -1,12 +1,9 @@
 package com.zenika.training.freenb.publishing.domain.workspace;
 
-import com.zenika.training.freenb.publishing.domain.workspace.IdWorkspace;
-import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
-
 public interface Workspaces {
 
-    Workspace findBy(IdWorkspace idWorkspace);
+    Workspace findBy(WorkspaceId idWorkspace);
 
-    IdWorkspace create(Workspace newWorkspace);
+    WorkspaceId create(Workspace newWorkspace);
 
 }

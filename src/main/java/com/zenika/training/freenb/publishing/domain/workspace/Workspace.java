@@ -1,17 +1,15 @@
 package com.zenika.training.freenb.publishing.domain.workspace;
 
-import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
-import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
-import com.zenika.training.freenb.publishing.domain.workspace.IdWorkspace;
+import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.shared.AggregateRoot;
 
-public class Workspace extends AggregateRoot<IdWorkspace> {
+public class Workspace extends AggregateRoot<WorkspaceId> {
 
-    private final IdFreelanceHost idHost;
+    private final FreelanceHostId idHost;
     private final Capacity capacity;
 
-    public Workspace(IdFreelanceHost idHost, Capacity capacity) {
-        super(IdWorkspace.create());
+    public Workspace(FreelanceHostId idHost, Capacity capacity) {
+        super(WorkspaceId.create());
         this.idHost = idHost;
         this.capacity = capacity;
     }
@@ -20,7 +18,7 @@ public class Workspace extends AggregateRoot<IdWorkspace> {
         return this.capacity.value() <= capacity.value();
     }
 
-    public IdFreelanceHost getIdHost() {
+    public FreelanceHostId getIdHost() {
         return idHost;
     }
 

@@ -19,7 +19,7 @@ import static org.mockito.Mockito.verify;
 public class PublishOfferTest {
 
 
-    public static final IdFreelanceHost HOST = IdFreelanceHost.create();
+    public static final FreelanceHostId HOST = FreelanceHostId.create();
     PublishOfferService publishOfferService;
     Offers offerRepository;
     OfferPublisher publisher;
@@ -40,7 +40,7 @@ public class PublishOfferTest {
 
         // étant donné un workspace
         // et une période
-        IdWorkspace myWorkspaceId = aWorkspaceExist();
+        WorkspaceId myWorkspaceId = aWorkspaceExist();
 
         LocalDate start = LocalDate.of(2023, 11, 1);
         LocalDate end = LocalDate.of(2023, 11, 30);
@@ -48,7 +48,7 @@ public class PublishOfferTest {
 
         // quand je veux publier une offre
         // pour ce workspace
-        IdOffer idOffer = publishOfferService.execute(myWorkspaceId, period, new Capacity(2));
+        OffId idOffer = publishOfferService.execute(myWorkspaceId, period, new Capacity(2));
 
         // alors une offre est publiée
         Offer offer = offerRepository.findById(idOffer);
@@ -59,14 +59,14 @@ public class PublishOfferTest {
     @Test
     void should_notify_offer_published() {
 
-        IdWorkspace myWorkspaceId = aWorkspaceExist();
+        WorkspaceId myWorkspaceId = aWorkspaceExist();
         LocalDate start = LocalDate.of(2023, 11, 1);
         LocalDate end = LocalDate.of(2023, 11, 30);
         OfferPeriod period = OfferPeriod.between(start, end);
 
         // quand je veux publier une offre
         // pour ce workspace
-        IdOffer idOffer = publishOfferService.execute(myWorkspaceId, period, new Capacity(2));
+        OffId idOffer = publishOfferService.execute(myWorkspaceId, period, new Capacity(2));
 
         // alors une offre est publiée
         Offer offer = offerRepository.findById(idOffer);
@@ -77,7 +77,7 @@ public class PublishOfferTest {
     @Test
     void should_not_be_able_to_create_an_offer_when_workspace_does_not_exist() {
 
-        IdWorkspace myWorkspaceId = IdWorkspace.create();
+        WorkspaceId myWorkspaceId = WorkspaceId.create();
         LocalDate start = LocalDate.of(2023, 11, 1);
         LocalDate end = LocalDate.of(2023, 11, 30);
         OfferPeriod period = OfferPeriod.between(start, end);
@@ -91,7 +91,7 @@ public class PublishOfferTest {
     @Test
     void should_not_be_able_to_create_an_offer_when_capacity_superior_to_workspace_capacity() {
 
-        IdWorkspace myWorkspaceId = aWorkspaceExistWithCapacity(1);
+        WorkspaceId myWorkspaceId = aWorkspaceExistWithCapacity(1);
         LocalDate start = LocalDate.of(2023, 11, 1);
         LocalDate end = LocalDate.of(2023, 11, 30);
         OfferPeriod period = OfferPeriod.between(start, end);
@@ -106,7 +106,7 @@ public class PublishOfferTest {
     @Test
     void should_not_be_able_to_create_an_offer_when_all_offers_capacity_are_superior_to_workspace_capacity() {
 
-        IdWorkspace myWorkspaceId = aWorkspaceExistWithCapacity(5);
+        WorkspaceId myWorkspaceId = aWorkspaceExistWithCapacity(5);
         offerOfCapacityIsPublished(myWorkspaceId, 1);
         offerOfCapacityIsPublished(myWorkspaceId, 3);
         LocalDate start = LocalDate.of(2023, 11, 1);
@@ -120,19 +120,19 @@ public class PublishOfferTest {
 
     }
 
-    private void offerOfCapacityIsPublished(IdWorkspace idWorkspace, int capacity) {
+    private void offerOfCapacityIsPublished(WorkspaceId idWorkspace, int capacity) {
         offers.publish(new Offer(idWorkspace, new Capacity(capacity), null));
     }
 
 
-    private IdWorkspace aWorkspaceExistWithCapacity(int capacity) {
+    private WorkspaceId aWorkspaceExistWithCapacity(int capacity) {
         Workspace newWorkspace = new Workspace(null, new Capacity(capacity));
         workspaces.create(newWorkspace);
         return newWorkspace.getId();
 
     }
 
-    private IdWorkspace aWorkspaceExist() {
+    private WorkspaceId aWorkspaceExist() {
         Workspace newWorkspace = new Workspace(HOST, new Capacity(10));
         workspaces.create(newWorkspace);
         return newWorkspace.getId();

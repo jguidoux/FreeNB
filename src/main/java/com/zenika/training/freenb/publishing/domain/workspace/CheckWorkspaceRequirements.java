@@ -16,7 +16,7 @@ public class CheckWorkspaceRequirements {
         this.offers = offers;
     }
 
-    public Workspace checkWorkspaceRequirements(IdWorkspace aWorkspaceId, Capacity newOfferCapacity) {
+    public Workspace checkWorkspaceRequirements(WorkspaceId aWorkspaceId, Capacity newOfferCapacity) {
         Workspace existingWorkspace = this.workspaces.findBy(aWorkspaceId);
         if (existingWorkspace == null) {
             throw new WorkspaceDoesNotExist();
@@ -32,7 +32,7 @@ public class CheckWorkspaceRequirements {
         return existingWorkspace;
     }
 
-    private Capacity sumAllExistingOffersCapacityFor(IdWorkspace aWorkspaceId) {
+    private Capacity sumAllExistingOffersCapacityFor(WorkspaceId aWorkspaceId) {
         List<Offer> offersOfWorkspace = offers.findOfferOfWorkspace(aWorkspaceId);
         return offersOfWorkspace.stream()
                                 .map(Offer::getCapacity)

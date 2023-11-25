@@ -1,7 +1,7 @@
 package com.zenika.training.freenb.publishing.infra;
 
-import com.zenika.training.freenb.publishing.domain.offer.IdOffer;
-import com.zenika.training.freenb.publishing.domain.workspace.IdWorkspace;
+import com.zenika.training.freenb.publishing.domain.offer.OffId;
+import com.zenika.training.freenb.publishing.domain.workspace.WorkspaceId;
 import com.zenika.training.freenb.publishing.domain.offer.Offer;
 import com.zenika.training.freenb.publishing.domain.offer.Offers;
 import org.springframework.stereotype.Repository;
@@ -12,11 +12,11 @@ import java.util.Map;
 
 @Repository
 public class OfferInMemory implements Offers {
-    private final Map<IdOffer, Offer> repo = new HashMap<>();
+    private final Map<OffId, Offer> repo = new HashMap<>();
 
 
     @Override
-    public Offer findById(IdOffer idOffer) {
+    public Offer findById(OffId idOffer) {
         return repo.get(idOffer);
     }
 
@@ -26,7 +26,7 @@ public class OfferInMemory implements Offers {
     }
 
     @Override
-    public List<Offer> findOfferOfWorkspace(IdWorkspace aWorkspaceId) {
+    public List<Offer> findOfferOfWorkspace(WorkspaceId aWorkspaceId) {
         return repo.values().stream()
                 .filter(offer -> offer.getWorkspaceId().equals(aWorkspaceId))
                 .toList();

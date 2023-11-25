@@ -1,6 +1,6 @@
 package com.zenika.training.freenb.reservation.domain;
 
-import com.zenika.training.freenb.publishing.domain.IdFreelanceHost;
+import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.shared.AggregateRoot;
 import lombok.Getter;
 
@@ -9,9 +9,9 @@ public class AvailableOffer extends AggregateRoot<OfferId> {
 
     @Getter
     private Seats availableSeats;
-    private  final IdFreelanceHost host;
+    private  final FreelanceHostId host;
 
-    public AvailableOffer(IdFreelanceHost host, OfferId offerId, Seats seats) {
+    public AvailableOffer(FreelanceHostId host, OfferId offerId, Seats seats) {
         super(offerId);
         this.availableSeats = seats;
         this.host = host;
