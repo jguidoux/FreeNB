@@ -1,6 +1,7 @@
 package com.zenika.training.freenb.reservation.application;
 
 import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
+import com.zenika.training.freenb.reservation.domain.HostId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.Seats;
@@ -16,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RefusedReservationTest {
 
     public static final int AVAILABLE_SEATS_AT_START = 5;
-    public static final FreelanceHostId HOST = FreelanceHostId.create();
+    public static final HostId HOST = HostId.create();
     private AvailableOffersInMemory availableOffers;
     private AddNewAvailableOffer addNewAvailableOffer;
     private Reservations reservations;

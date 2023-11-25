@@ -5,7 +5,7 @@ import com.zenika.training.freenb.publishing.domain.workspace.WorkspaceId;
 import java.util.List;
 
 public interface Offers {
-    Offer findById(OffId idOffer);
+    Offer findById(OfferId idOffer);
 
     void publish(Offer offer);
 

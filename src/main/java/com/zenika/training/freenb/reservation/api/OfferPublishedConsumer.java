@@ -1,7 +1,7 @@
 package com.zenika.training.freenb.reservation.api;
 
-import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.freenb.reservation.application.AddNewAvailableOffer;
+import com.zenika.training.freenb.reservation.domain.HostId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.Seats;
@@ -19,7 +19,7 @@ public class OfferPublishedConsumer {
 
     @EventListener
     public void receive(OfferPublished offerPublished) {
-        AvailableOffer availableOffers = new AvailableOffer(FreelanceHostId.fromString(offerPublished.hostId()), new OfferId(offerPublished.value()), new Seats(offerPublished.capacity()));
+        AvailableOffer availableOffers = new AvailableOffer(HostId.fromString(offerPublished.hostId()), new OfferId(offerPublished.value()), new Seats(offerPublished.capacity()));
         service.execute(availableOffers);
     }
 }

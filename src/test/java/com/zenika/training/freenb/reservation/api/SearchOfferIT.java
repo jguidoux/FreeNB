@@ -1,11 +1,7 @@
 package com.zenika.training.freenb.reservation.api;
 
-import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
-import com.zenika.training.freenb.reservation.domain.availableoffers.SearchQuery;
-import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
-import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffers;
-import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
-import com.zenika.training.freenb.reservation.domain.availableoffers.Seats;
+import com.zenika.training.freenb.reservation.domain.HostId;
+import com.zenika.training.freenb.reservation.domain.availableoffers.*;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
@@ -22,7 +18,7 @@ import static org.hamcrest.Matchers.hasItems;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SearchOfferIT {
 
-    public static final FreelanceHostId HOST = FreelanceHostId.create();
+    public static final HostId HOST = HostId.create();
     @LocalServerPort
     private Integer port;
 

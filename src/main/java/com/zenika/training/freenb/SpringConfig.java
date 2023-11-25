@@ -2,9 +2,9 @@ package com.zenika.training.freenb;
 
 import com.zenika.training.freenb.publishing.applcation.PublishOfferService;
 import com.zenika.training.freenb.publishing.application.CreateWorkspaceService;
-import com.zenika.training.freenb.publishing.domain.workspace.CheckWorkspaceRequirements;
 import com.zenika.training.freenb.publishing.domain.offer.OfferPublisher;
 import com.zenika.training.freenb.publishing.domain.offer.Offers;
+import com.zenika.training.freenb.publishing.domain.workspace.CheckWorkspaceRequirements;
 import com.zenika.training.freenb.publishing.domain.workspace.Workspaces;
 import com.zenika.training.freenb.reservation.application.*;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffers;

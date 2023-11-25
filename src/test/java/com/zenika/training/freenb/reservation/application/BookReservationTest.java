@@ -1,6 +1,6 @@
 package com.zenika.training.freenb.reservation.application;
 
-import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
+import com.zenika.training.freenb.reservation.domain.HostId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffers;
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class BookReservationTest {
 
-    public static final FreelanceHostId HOST = FreelanceHostId.create();
+    public static final HostId HOST = HostId.create();
     private AvailableOffers availableOffers;
     private Reservations reservations;
     private BookReservationService service;
@@ -49,9 +49,10 @@ class BookReservationTest {
 
         assertThat(reservations.findById(reservation.getId())).isNotNull();
     }
+
     private OfferId existAvailableOfferWith(int availableSeats) {
         OfferId offerId = OfferId.create();
-        availableOffers.add(new AvailableOffer(HOST, offerId,  Seats.fromInt(availableSeats)));
+        availableOffers.add(new AvailableOffer(HOST, offerId, Seats.fromInt(availableSeats)));
         return offerId;
     }
 }

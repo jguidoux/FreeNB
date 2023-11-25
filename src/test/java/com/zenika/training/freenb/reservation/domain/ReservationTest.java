@@ -13,7 +13,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class ReservationTest {
 
 
-    public static final FreelanceHostId HOST = FreelanceHostId.create();
+    public static final HostId HOST = HostId.create();
+    public static final HostId WRONG_HOST = HostId.create();
 
     @Test
     void should_be_refused_when_refuser_is_the_owner() {
@@ -28,7 +29,7 @@ class ReservationTest {
     void should_not_accept_when_refuser_is_not_the_owner() {
         Reservation reservation = new Reservation(OfferId.create(), HOST);
 
-        assertThatThrownBy(() -> reservation.refused(FreelanceHostId.create()))
+        assertThatThrownBy(() -> reservation.refused(WRONG_HOST))
                 .isInstanceOf(NotAuthorizeToRefuseReservation.class);
     }
 }

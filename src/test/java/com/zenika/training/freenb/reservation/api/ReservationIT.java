@@ -3,6 +3,7 @@ package com.zenika.training.freenb.reservation.api;
 import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.freenb.reservation.application.AddNewAvailableOffer;
 import com.zenika.training.freenb.reservation.application.BookReservationService;
+import com.zenika.training.freenb.reservation.domain.HostId;
 import com.zenika.training.freenb.reservation.domain.reservation.ReservationId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
@@ -22,7 +23,7 @@ import static io.restassured.RestAssured.given;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ReservationIT {
 
-    public static final FreelanceHostId HOST = FreelanceHostId.create();
+    public static final HostId HOST = HostId.create();
     public static final OfferId OFFER_ID = new OfferId(UUID.randomUUID().toString());
 
     @LocalServerPort

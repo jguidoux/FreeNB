@@ -1,10 +1,10 @@
 package com.zenika.training.freenb.reservation.api;
 
 import com.zenika.training.freenb.reservation.application.BookReservationService;
-import com.zenika.training.freenb.reservation.domain.reservation.Reservation;
 import com.zenika.training.freenb.reservation.application.SearchCorrespondingOffers;
-import com.zenika.training.freenb.reservation.domain.availableoffers.SearchQuery;
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
+import com.zenika.training.freenb.reservation.domain.availableoffers.SearchQuery;
+import com.zenika.training.freenb.reservation.domain.reservation.Reservation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +24,8 @@ public class SearchOfferController {
     @PostMapping("/search")
     public ResponseEntity<CorrespondingOffersResponse> searchCorrespondingOffers(@RequestBody SearchQuery query) {
         return ResponseEntity.ok(new CorrespondingOffersResponse(searchService.execute(query).stream()
-                                                                                 .map(correspondingOffer -> new CorrespondingOfferResponse(correspondingOffer.id()
-                                                                                                                                                    .value()))
+                                                                              .map(correspondingOffer -> new CorrespondingOfferResponse(correspondingOffer.id()
+                                                                                                                                                          .value()))
                                                                               .toList()));
     }
 

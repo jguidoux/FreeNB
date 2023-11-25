@@ -5,7 +5,7 @@ public record Seats(int count) {
         return new Seats(availableSeats);
     }
 
-    Seats decrement() {
+    public Seats decrement() {
         return new Seats(count() - 1);
     }
 

@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class BookAvailableOfferTest {
 
-    public static final FreelanceHostId HOST = FreelanceHostId.create();
+    public static final HostId HOST = HostId.create();
 
     @Test
     void should_book_a_reservation() {

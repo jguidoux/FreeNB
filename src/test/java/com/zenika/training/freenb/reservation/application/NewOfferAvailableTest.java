@@ -1,6 +1,7 @@
 package com.zenika.training.freenb.reservation.application;
 
 import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
+import com.zenika.training.freenb.reservation.domain.HostId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.*;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class NewOfferAvailableTest {
 
 
-    public static final FreelanceHostId HOST = FreelanceHostId.create();
+    public static final HostId HOST = HostId.create();
 
     @Test
     void should_add_new_available_offer() {

@@ -48,7 +48,7 @@ public class PublishOfferTest {
 
         // quand je veux publier une offre
         // pour ce workspace
-        OffId idOffer = publishOfferService.execute(myWorkspaceId, period, new Capacity(2));
+        OfferId idOffer = publishOfferService.execute(myWorkspaceId, period, new Capacity(2));
 
         // alors une offre est publiée
         Offer offer = offerRepository.findById(idOffer);
@@ -66,7 +66,7 @@ public class PublishOfferTest {
 
         // quand je veux publier une offre
         // pour ce workspace
-        OffId idOffer = publishOfferService.execute(myWorkspaceId, period, new Capacity(2));
+        OfferId idOffer = publishOfferService.execute(myWorkspaceId, period, new Capacity(2));
 
         // alors une offre est publiée
         Offer offer = offerRepository.findById(idOffer);

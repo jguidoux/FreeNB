@@ -3,8 +3,8 @@ package com.zenika.training.freenb.publishing.applcation;
 import com.zenika.training.freenb.publishing.domain.offer.*;
 import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
 import com.zenika.training.freenb.publishing.domain.workspace.CheckWorkspaceRequirements;
-import com.zenika.training.freenb.publishing.domain.workspace.WorkspaceId;
 import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
+import com.zenika.training.freenb.publishing.domain.workspace.WorkspaceId;
 import com.zenika.training.freenb.reservation.api.OfferPublished;
 
 public class PublishOfferService {
@@ -19,13 +19,14 @@ public class PublishOfferService {
         this.checkWorkspaceRequirements = checkWorkspaceRequirements;
     }
 
-    public OffId execute(WorkspaceId aWorkspaceId, OfferPeriod aPeriod, Capacity capacity) {
+    public OfferId execute(WorkspaceId aWorkspaceId, OfferPeriod aPeriod, Capacity capacity) {
 
         Workspace workspace = checkWorkspaceRequirements.checkWorkspaceRequirements(aWorkspaceId, capacity);
 
         Offer offer = new Offer(aWorkspaceId, capacity, aPeriod);
         offerRepository.publish(offer);
-        publisher.publish(new OfferPublished(workspace.getIdHost().value(), offer.getId().value(), offer.getCapacity().value()));
+        publisher.publish(new OfferPublished(workspace.getIdHost().value(), offer.getId().value(), offer.getCapacity()
+                                                                                                        .value()));
         return offer.getId();
     }
 
