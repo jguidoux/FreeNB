@@ -16,11 +16,11 @@ public class RefuseReservationService {
     public void execute(RefuseReservationCommand request) {
         Reservation reservation = reservations.findById(request.reservationId());
 
-        reservation.refused(request.host());
+        ReservationRefused event = reservation.refused(request.host());
         this.reservations.save(reservation);
 
 
-        reservationRefusedService.reservationRefused(reservation);
+        reservationRefusedService.reservationRefused(event);
     }
 
 }

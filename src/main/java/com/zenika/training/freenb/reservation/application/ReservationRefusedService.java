@@ -2,7 +2,7 @@ package com.zenika.training.freenb.reservation.application;
 
 import com.zenika.training.freenb.reservation.domain.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.AvailableOffers;
-import com.zenika.training.freenb.reservation.domain.Reservation;
+import com.zenika.training.freenb.reservation.domain.ReservationRefused;
 
 public class ReservationRefusedService {
 
@@ -12,8 +12,8 @@ public class ReservationRefusedService {
         this.availableOffers = availableOffers;
     }
 
-    void reservationRefused(Reservation reservation) {
-        AvailableOffer availableOffer = this.availableOffers.findById(reservation.getOfferId());
+    void reservationRefused(ReservationRefused event) {
+        AvailableOffer availableOffer = this.availableOffers.findById(event.idOffer());
         availableOffer.bookRefused();
         this.availableOffers.update(availableOffer);
     }

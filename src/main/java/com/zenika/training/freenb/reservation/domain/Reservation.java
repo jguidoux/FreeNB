@@ -26,11 +26,12 @@ public class Reservation extends AggregateRoot<ReservationId> {
 
 
 
-    public void refused(IdFreelanceHost refuser) {
+    public ReservationRefused refused(IdFreelanceHost refuser) {
         if (!refuser.equals(this.host)) {
             throw new NotAuthorizeToRefuseReservation();
         }
         this.status = ReservationStatus.REFUSED;
+        return new ReservationRefused(this.offerId);
     }
 
 
