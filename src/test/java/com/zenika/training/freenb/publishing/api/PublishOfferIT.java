@@ -1,11 +1,11 @@
 package com.zenika.training.freenb.publishing.api;
 
-import com.zenika.training.freenb.publishing.domain.*;
+import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.freenb.publishing.domain.offer.Offer;
 import com.zenika.training.freenb.publishing.domain.offer.Offers;
 import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
-import com.zenika.training.freenb.publishing.domain.workspace.WorkspaceId;
 import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
+import com.zenika.training.freenb.publishing.domain.workspace.WorkspaceId;
 import com.zenika.training.freenb.publishing.domain.workspace.Workspaces;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -27,14 +27,12 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 public class PublishOfferIT {
 
     public static final FreelanceHostId HOST = FreelanceHostId.create();
-    @LocalServerPort
-    private Integer port;
-
     @SpyBean
     Offers repo;
-
     @Autowired
     Workspaces workspaces;
+    @LocalServerPort
+    private Integer port;
 
     @Test
     void should_create_new_workspace() {

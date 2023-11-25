@@ -1,6 +1,6 @@
 package com.zenika.training.freenb.publishing.applcation;
 
-import com.zenika.training.freenb.publishing.domain.*;
+import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.freenb.publishing.domain.offer.*;
 import com.zenika.training.freenb.publishing.domain.workspace.*;
 import com.zenika.training.freenb.publishing.infra.OfferInMemory;
@@ -26,6 +26,7 @@ public class PublishOfferTest {
     WorkspacesInMemory workspaces;
 
     Offers offers;
+
     @BeforeEach
     void setUp() {
         offerRepository = new OfferInMemory();

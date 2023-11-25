@@ -18,11 +18,10 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class CreateWorkspaceIT {
 
-    @LocalServerPort
-    private Integer port;
-
     @SpyBean
     Workspaces repo;
+    @LocalServerPort
+    private Integer port;
 
     @Test
     void should_create_new_workspace() {

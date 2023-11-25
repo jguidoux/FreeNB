@@ -1,10 +1,10 @@
 package com.zenika.training.freenb;
 
 import com.zenika.training.freenb.publishing.api.PublishOfferRequest;
-import com.zenika.training.freenb.publishing.domain.*;
+import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
-import com.zenika.training.freenb.publishing.domain.workspace.WorkspaceId;
 import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
+import com.zenika.training.freenb.publishing.domain.workspace.WorkspaceId;
 import com.zenika.training.freenb.publishing.domain.workspace.Workspaces;
 import com.zenika.training.freenb.reservation.domain.availableoffers.SearchQuery;
 import io.restassured.http.ContentType;
@@ -24,11 +24,10 @@ import static org.hamcrest.Matchers.hasItems;
 public class SearchOfferPublishIT {
 
     public static final FreelanceHostId HOST = FreelanceHostId.create();
-    @LocalServerPort
-    private Integer port;
-
     @Autowired
     Workspaces workspaces;
+    @LocalServerPort
+    private Integer port;
 
     @Test
     void should_find_corresponding_offer_when_offer_published() {

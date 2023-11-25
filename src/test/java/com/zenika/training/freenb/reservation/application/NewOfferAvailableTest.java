@@ -1,6 +1,5 @@
 package com.zenika.training.freenb.reservation.application;
 
-import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.freenb.reservation.domain.HostId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.*;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
@@ -21,8 +20,9 @@ public class NewOfferAvailableTest {
     void should_add_new_available_offer() {
 
         AvailableOffers availableOffers = new AvailableOffersInMemory();
-        AddNewAvailableOffer addOfferService =new AddNewAvailableOffer(availableOffers);
-        AvailableOffer availableOffer = new AvailableOffer(HOST, new OfferId(UUID.randomUUID().toString()), new Seats(2));
+        AddNewAvailableOffer addOfferService = new AddNewAvailableOffer(availableOffers);
+        AvailableOffer availableOffer = new AvailableOffer(HOST, new OfferId(UUID.randomUUID()
+                                                                                 .toString()), new Seats(2));
 
         addOfferService.execute(availableOffer);
 

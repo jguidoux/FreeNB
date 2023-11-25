@@ -8,9 +8,9 @@ import lombok.Getter;
 
 public class AvailableOffer extends AggregateRoot<OfferId> {
 
+    private final HostId host;
     @Getter
     private Seats availableSeats;
-    private final HostId host;
 
     public AvailableOffer(HostId host, OfferId offerId, Seats seats) {
         super(offerId);

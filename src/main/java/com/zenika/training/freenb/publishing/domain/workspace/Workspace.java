@@ -2,6 +2,7 @@ package com.zenika.training.freenb.publishing.domain.workspace;
 
 import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.shared.AggregateRoot;
+import lombok.Getter;
 
 public class Workspace extends AggregateRoot<WorkspaceId> {
 

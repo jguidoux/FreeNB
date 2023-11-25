@@ -7,7 +7,4 @@ public record FreelanceHostId(String value) {
         return new FreelanceHostId(UUID.randomUUID().toString());
     }
 
-    public static FreelanceHostId fromString(String hostId) {
-        return new FreelanceHostId(hostId);
-    }
 }

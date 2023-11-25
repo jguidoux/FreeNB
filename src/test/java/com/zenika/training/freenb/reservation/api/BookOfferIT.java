@@ -23,12 +23,10 @@ import static org.hamcrest.Matchers.not;
 class BookOfferIT {
 
     public static final HostId HOST = HostId.create();
-
-    @LocalServerPort
-    private Integer port;
-
     @Autowired
     AvailableOffers availableOffers;
+    @LocalServerPort
+    private Integer port;
 
     @Test
     void should_find_offers() {

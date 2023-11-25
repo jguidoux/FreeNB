@@ -10,11 +10,10 @@ public class Reservation extends AggregateRoot<ReservationId> {
 
     @Getter
     private final OfferId offerId;
-
-    @Getter
-    private ReservationStatus status;
     @Getter
     private final HostId host;
+    @Getter
+    private ReservationStatus status;
 
 
     public Reservation(OfferId offerId, HostId host) {

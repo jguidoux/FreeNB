@@ -19,11 +19,10 @@ import static org.hamcrest.Matchers.hasItems;
 class SearchOfferIT {
 
     public static final HostId HOST = HostId.create();
-    @LocalServerPort
-    private Integer port;
-
     @Autowired
     AvailableOffers repo;
+    @LocalServerPort
+    private Integer port;
 
     @Test
     void should_find_offers() {

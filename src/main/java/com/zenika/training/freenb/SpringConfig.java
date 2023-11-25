@@ -43,7 +43,7 @@ public class SpringConfig {
     }
 
     @Bean
-    public RefuseReservationService reservationService(Reservations reservation, ReservationRefusedService reservationRefusedService) {
+    public RefuseReservationService reservationService(Reservations reservation) {
         return new RefuseReservationService(reservation);
     }
 

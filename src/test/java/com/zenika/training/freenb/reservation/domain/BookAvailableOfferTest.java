@@ -1,6 +1,5 @@
 package com.zenika.training.freenb.reservation.domain;
 
-import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.Seats;
