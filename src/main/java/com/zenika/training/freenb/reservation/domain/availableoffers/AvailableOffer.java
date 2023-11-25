@@ -1,6 +1,7 @@
-package com.zenika.training.freenb.reservation.domain;
+package com.zenika.training.freenb.reservation.domain.availableoffers;
 
 import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
+import com.zenika.training.freenb.reservation.domain.reservation.Reservation;
 import com.zenika.training.shared.AggregateRoot;
 import lombok.Getter;
 

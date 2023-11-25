@@ -1,7 +1,10 @@
 package com.zenika.training.freenb.reservation.application;
 
 import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
-import com.zenika.training.freenb.reservation.domain.*;
+import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
+import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
+import com.zenika.training.freenb.reservation.domain.availableoffers.Seats;
+import com.zenika.training.freenb.reservation.domain.reservation.*;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
 import com.zenika.training.freenb.reservation.infra.ReservationsInMemory;
 import com.zenika.training.shared.domain_event.DomainEventPublisher;

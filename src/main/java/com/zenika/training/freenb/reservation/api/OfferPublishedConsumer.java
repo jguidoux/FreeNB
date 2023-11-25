@@ -2,9 +2,9 @@ package com.zenika.training.freenb.reservation.api;
 
 import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.freenb.reservation.application.AddNewAvailableOffer;
-import com.zenika.training.freenb.reservation.domain.AvailableOffer;
-import com.zenika.training.freenb.reservation.domain.OfferId;
-import com.zenika.training.freenb.reservation.domain.Seats;
+import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
+import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
+import com.zenika.training.freenb.reservation.domain.availableoffers.Seats;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 

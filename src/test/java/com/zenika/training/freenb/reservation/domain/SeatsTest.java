@@ -1,5 +1,6 @@
 package com.zenika.training.freenb.reservation.domain;
 
+import com.zenika.training.freenb.reservation.domain.availableoffers.Seats;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

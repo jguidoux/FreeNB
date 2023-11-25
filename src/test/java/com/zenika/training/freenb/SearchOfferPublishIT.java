@@ -6,7 +6,7 @@ import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
 import com.zenika.training.freenb.publishing.domain.workspace.WorkspaceId;
 import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
 import com.zenika.training.freenb.publishing.domain.workspace.Workspaces;
-import com.zenika.training.freenb.reservation.domain.SearchQuery;
+import com.zenika.training.freenb.reservation.domain.availableoffers.SearchQuery;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;

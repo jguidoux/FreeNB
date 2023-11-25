@@ -1,9 +1,9 @@
 package com.zenika.training.freenb.reservation.infra;
 
-import com.zenika.training.freenb.reservation.domain.SearchQuery;
-import com.zenika.training.freenb.reservation.domain.AvailableOffer;
-import com.zenika.training.freenb.reservation.domain.AvailableOffers;
-import com.zenika.training.freenb.reservation.domain.OfferId;
+import com.zenika.training.freenb.reservation.domain.availableoffers.SearchQuery;
+import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
+import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffers;
+import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

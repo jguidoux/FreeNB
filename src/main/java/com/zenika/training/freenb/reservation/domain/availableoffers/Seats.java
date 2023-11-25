@@ -1,4 +1,4 @@
-package com.zenika.training.freenb.reservation.domain;
+package com.zenika.training.freenb.reservation.domain.availableoffers;
 
 public record Seats(int count) {
     public static Seats fromInt(int availableSeats) {

@@ -1,8 +1,8 @@
 package com.zenika.training.freenb.reservation.application;
 
-import com.zenika.training.freenb.reservation.domain.AvailableOffer;
-import com.zenika.training.freenb.reservation.domain.AvailableOffers;
-import com.zenika.training.freenb.reservation.domain.ReservationRefused;
+import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
+import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffers;
+import com.zenika.training.freenb.reservation.domain.reservation.ReservationRefused;
 import com.zenika.training.shared.domain_event.DomainEvent;
 
 import java.util.Objects;

@@ -2,8 +2,8 @@ package com.zenika.training.freenb.reservation.api;
 
 import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
 import com.zenika.training.freenb.reservation.application.RefuseReservationService;
-import com.zenika.training.freenb.reservation.domain.ReservationId;
-import com.zenika.training.freenb.reservation.domain.RefuseReservationCommand;
+import com.zenika.training.freenb.reservation.domain.reservation.ReservationId;
+import com.zenika.training.freenb.reservation.domain.reservation.RefuseReservationCommand;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

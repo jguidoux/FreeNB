@@ -1,7 +1,7 @@
 package com.zenika.training.freenb.reservation.application;
 
 import com.zenika.training.freenb.publishing.domain.FreelanceHostId;
-import com.zenika.training.freenb.reservation.domain.*;
+import com.zenika.training.freenb.reservation.domain.availableoffers.*;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
 import org.junit.jupiter.api.Test;
 

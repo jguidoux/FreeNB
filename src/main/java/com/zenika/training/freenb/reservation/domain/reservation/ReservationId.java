@@ -1,4 +1,4 @@
-package com.zenika.training.freenb.reservation.domain;
+package com.zenika.training.freenb.reservation.domain.reservation;
 
 import java.util.UUID;
 
