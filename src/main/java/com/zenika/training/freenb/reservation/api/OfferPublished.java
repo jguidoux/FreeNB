@@ -1,4 +1,6 @@
 package com.zenika.training.freenb.reservation.api;
 
-public record OfferPublished(String hostId, String value, int capacity, java.util.List<java.time.LocalDate> planning) {
+import java.util.Set;
+
+public record OfferPublished(String hostId, String value, int capacity, Set<java.time.LocalDate> planning) {
 }

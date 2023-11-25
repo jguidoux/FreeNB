@@ -9,11 +9,13 @@ public class AvailableOffer extends AggregateRoot<OfferId> {
 
     private final HostId host;
     private Seats availableSeats;
+    private final Planning planning;
 
-    public AvailableOffer(HostId host, OfferId offerId, Seats seats) {
+    public AvailableOffer(HostId host, OfferId offerId, Seats seats, Planning planning) {
         super(offerId);
         this.availableSeats = seats;
         this.host = host;
+        this.planning = planning;
     }
 
 
@@ -33,5 +35,9 @@ public class AvailableOffer extends AggregateRoot<OfferId> {
 
     public Seats getAvailableSeats() {
         return this.availableSeats;
+    }
+
+    public Planning getPlanning() {
+        return this.planning;
     }
 }

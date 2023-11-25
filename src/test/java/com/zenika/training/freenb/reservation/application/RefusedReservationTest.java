@@ -3,6 +3,7 @@ package com.zenika.training.freenb.reservation.application;
 import com.zenika.training.freenb.reservation.domain.HostId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
+import com.zenika.training.freenb.reservation.domain.availableoffers.Planning;
 import com.zenika.training.freenb.reservation.domain.availableoffers.Seats;
 import com.zenika.training.freenb.reservation.domain.reservation.*;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
@@ -10,6 +11,9 @@ import com.zenika.training.freenb.reservation.infra.ReservationsInMemory;
 import com.zenika.training.shared.domain_event.DomainEventPublisher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,6 +25,7 @@ class RefusedReservationTest {
     private AddNewAvailableOffer addNewAvailableOffer;
     private Reservations reservations;
     private BookReservationService bookReservationService;
+    private Planning planning;
 
     @BeforeEach
     void setUp() {
@@ -30,6 +35,12 @@ class RefusedReservationTest {
         bookReservationService = new BookReservationService(availableOffers, reservations);
 
         DomainEventPublisher.register(evt -> new ReservationRefusedService(availableOffers).execute(evt), ReservationRefused.class.getCanonicalName());
+
+        LocalDate day1 = LocalDate.of(2023, 11, 1);
+        LocalDate day2 = LocalDate.of(2023, 11, 2);
+        Set<LocalDate> days = Set.of(day1, day2);
+        planning = Planning.fromListOfDays(days);
+
     }
 
     @Test
@@ -75,7 +86,7 @@ class RefusedReservationTest {
 
     private OfferId anAvailableOfferExist() {
         OfferId offerId = OfferId.create();
-        addNewAvailableOffer.execute(new AvailableOffer(HOST, offerId, Seats.fromInt(AVAILABLE_SEATS_AT_START)));
+        addNewAvailableOffer.execute(new AvailableOffer(HOST, offerId, Seats.fromInt(AVAILABLE_SEATS_AT_START), planning));
         return offerId;
     }
 

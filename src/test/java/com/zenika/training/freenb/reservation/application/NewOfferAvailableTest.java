@@ -5,7 +5,9 @@ import com.zenika.training.freenb.reservation.domain.availableoffers.*;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,8 +23,13 @@ public class NewOfferAvailableTest {
 
         AvailableOffers availableOffers = new AvailableOffersInMemory();
         AddNewAvailableOffer addOfferService = new AddNewAvailableOffer(availableOffers);
-        AvailableOffer availableOffer = new AvailableOffer(HOST, new OfferId(UUID.randomUUID()
-                                                                                 .toString()), new Seats(2));
+        LocalDate day1 = LocalDate.of(2023, 11, 1);
+        LocalDate day2 = LocalDate.of(2023, 11, 2);
+        Planning planning = Planning.fromListOfDays(Set.of(day1, day2));
+        AvailableOffer availableOffer = new AvailableOffer(HOST,
+                new OfferId(UUID.randomUUID().toString()),
+                new Seats(2),
+                planning);
 
         addOfferService.execute(availableOffer);
 
