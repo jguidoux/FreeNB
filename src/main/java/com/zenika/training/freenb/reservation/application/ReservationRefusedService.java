@@ -18,7 +18,7 @@ public class ReservationRefusedService {
     public void execute(DomainEvent event) {
         if (Objects.requireNonNull(event) instanceof ReservationRefused refusedEvent) {
             AvailableOffer availableOffer = this.availableOffers.findById(refusedEvent.idOffer());
-            availableOffer.bookRefused();
+            availableOffer.bookRefused(refusedEvent.period());
             this.availableOffers.update(availableOffer);
         }
     }

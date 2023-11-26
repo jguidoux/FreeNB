@@ -15,7 +15,7 @@ public class SearchCorrespondingOffers {
 
     public List<CorrespondingOffer> execute(SearchQuery searchQuery) {
         return repo.search(searchQuery).stream()
-                   .map(availableOffer -> new CorrespondingOffer(availableOffer.getId()))
+                   .map(availableOffer -> new CorrespondingOffer(availableOffer.getId(), searchQuery.period()))
                    .toList();
     }
 }

@@ -2,7 +2,7 @@ package com.zenika.training.freenb.reservation.application;
 
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffers;
-import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
+import com.zenika.training.freenb.reservation.domain.availableoffers.CorrespondingOffer;
 import com.zenika.training.freenb.reservation.domain.reservation.Reservation;
 import com.zenika.training.freenb.reservation.domain.reservation.Reservations;
 
@@ -16,9 +16,10 @@ public class BookReservationService {
         this.reservations = reservations;
     }
 
-    public Reservation execute(OfferId id) {
-        AvailableOffer availableOffer = repo.findById(id);
-        Reservation newReservation = availableOffer.book();
+    public Reservation execute(CorrespondingOffer correspondingOffer) {
+        AvailableOffer availableOffer = repo.findById(correspondingOffer.id());
+
+        Reservation newReservation = availableOffer.book(correspondingOffer.period());
         reservations.save(newReservation);
         return newReservation;
     }

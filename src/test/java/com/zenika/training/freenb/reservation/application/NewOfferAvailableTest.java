@@ -26,11 +26,11 @@ public class NewOfferAvailableTest {
         AddNewAvailableOffer addOfferService = new AddNewAvailableOffer(availableOffers);
         LocalDate day1 = LocalDate.of(2023, 11, 1);
         LocalDate day2 = LocalDate.of(2023, 11, 2);
-        Planning planning = Planning.fromListOfDays(Set.of(day1, day2));
+        Set<LocalDate> days = Set.of(day1, day2);
         AvailableOffer availableOffer = new AvailableOffer(HOST,
                 new OfferId(UUID.randomUUID().toString()),
                 new Seats(2),
-                planning);
+                days);
 
         addOfferService.execute(availableOffer);
 

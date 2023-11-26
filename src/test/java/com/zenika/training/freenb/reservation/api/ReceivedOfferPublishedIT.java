@@ -2,10 +2,7 @@ package com.zenika.training.freenb.reservation.api;
 
 import com.zenika.training.freenb.reservation.application.AddNewAvailableOffer;
 import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
-import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
-import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
-import com.zenika.training.freenb.reservation.domain.availableoffers.Planning;
-import com.zenika.training.freenb.reservation.domain.availableoffers.SearchQuery;
+import com.zenika.training.freenb.reservation.domain.availableoffers.*;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +38,7 @@ class ReceivedOfferPublishedIT {
         assertThat(foundOffers).hasSize(1);
         AvailableOffer offer = foundOffers.get(0);
         assertThat(offer.getId()).isEqualTo(new OfferId(offerId));
-        assertThat(offer.getPlanning()).isEqualTo(Planning.fromListOfDays(days));
+        assertThat(offer.getPlanning()).isEqualTo(Planning.fromListOfDays(days, Seats.fromInt(2)));
 
 
     }

@@ -1,4 +1,6 @@
 package com.zenika.training.freenb.reservation.api;
 
-public record BookingRequest() {
+import java.time.LocalDate;
+
+public record BookingRequest(LocalDate from, LocalDate to) {
 }

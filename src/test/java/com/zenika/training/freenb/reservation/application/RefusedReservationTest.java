@@ -1,9 +1,10 @@
 package com.zenika.training.freenb.reservation.application;
 
 import com.zenika.training.freenb.reservation.domain.HostId;
+import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
+import com.zenika.training.freenb.reservation.domain.availableoffers.CorrespondingOffer;
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
-import com.zenika.training.freenb.reservation.domain.availableoffers.Planning;
 import com.zenika.training.freenb.reservation.domain.availableoffers.Seats;
 import com.zenika.training.freenb.reservation.domain.reservation.*;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
@@ -25,7 +26,7 @@ class RefusedReservationTest {
     private AddNewAvailableOffer addNewAvailableOffer;
     private Reservations reservations;
     private BookReservationService bookReservationService;
-    private Planning planning;
+    private Set<LocalDate> days;
 
     @BeforeEach
     void setUp() {
@@ -38,15 +39,17 @@ class RefusedReservationTest {
 
         LocalDate day1 = LocalDate.of(2023, 11, 1);
         LocalDate day2 = LocalDate.of(2023, 11, 2);
-        Set<LocalDate> days = Set.of(day1, day2);
-        planning = Planning.fromListOfDays(days);
+        days = Set.of(day1, day2);
 
     }
 
     @Test
     void new_reservation_should_not_be_in_status_waiting() {
 
-        Reservation existingReservation = new Reservation(OfferId.create(), HOST);
+        LocalDate from = LocalDate.of(2023, 11, 1);
+        LocalDate to = LocalDate.of(2023, 11, 2);
+        PeriodCriteria period = PeriodCriteria.between(from, to);
+        Reservation existingReservation = new Reservation(OfferId.create(), HOST, period);
 
         assertThat(existingReservation.getStatus()).isEqualTo(ReservationStatus.WAITING_ANSWER);
     }
@@ -56,37 +59,45 @@ class RefusedReservationTest {
     void refusing_reservation_should_increment_free_seat_number_for_the_offer() {
 
         OfferId offerId = anAvailableOfferExist();
-
-        Reservation reservation = bookReservationService.execute(offerId);
+        LocalDate from = LocalDate.of(2023, 11, 1);
+        LocalDate to = LocalDate.of(2023, 11, 2);
+        PeriodCriteria period = PeriodCriteria.between(from, to);
+        Reservation reservation = bookReservationService.execute(new CorrespondingOffer(offerId, period));
         ReservationId reservationId = reservation.getId();
         RefuseReservationService refusedReservationService = new RefuseReservationService(reservations);
 
         RefuseReservationCommand refuseOfferRequest = new RefuseReservationCommand(reservationId, HOST);
         refusedReservationService.execute(refuseOfferRequest);
 
-        Seats availableSeats = availableOffers.findById(offerId).getAvailableSeats();
-        assertThat(availableSeats).isEqualTo(Seats.fromInt(AVAILABLE_SEATS_AT_START));
+        AvailableOffer offer = availableOffers.findById(offerId);
+        assertThat(offer.getAvailableSeatsForDay(LocalDate.of(2023, 11, 1))).isEqualTo(Seats.fromInt(AVAILABLE_SEATS_AT_START));
+        assertThat(offer.getAvailableSeatsForDay(LocalDate.of(2023, 11, 2))).isEqualTo(Seats.fromInt(AVAILABLE_SEATS_AT_START));
     }
 
     @Test
     void only_host_should_be_able_to_refused_a_reservation() {
 
         OfferId offerId = anAvailableOfferExist();
-
-        Reservation reservation = bookReservationService.execute(offerId);
+        LocalDate from = LocalDate.of(2023, 11, 1);
+        LocalDate to = LocalDate.of(2023, 11, 2);
+        PeriodCriteria period = PeriodCriteria.between(from, to);
+        Reservation reservation = bookReservationService.execute(new CorrespondingOffer(offerId, period));
         ReservationId reservationId = reservation.getId();
         RefuseReservationService refusedReservationService = new RefuseReservationService(reservations);
 
         RefuseReservationCommand refuseOfferRequest = new RefuseReservationCommand(reservationId, HOST);
         refusedReservationService.execute(refuseOfferRequest);
 
-        Seats availableSeats = availableOffers.findById(offerId).getAvailableSeats();
-        assertThat(availableSeats).isEqualTo(Seats.fromInt(AVAILABLE_SEATS_AT_START));
+        AvailableOffer offer = availableOffers.findById(offerId);
+
+        assertThat(offer.getAvailableSeatsForDay(LocalDate.of(2023, 11, 1))).isEqualTo(Seats.fromInt(AVAILABLE_SEATS_AT_START));
+        assertThat(offer.getAvailableSeatsForDay(LocalDate.of(2023, 11, 2))).isEqualTo(Seats.fromInt(AVAILABLE_SEATS_AT_START));
+
     }
 
     private OfferId anAvailableOfferExist() {
         OfferId offerId = OfferId.create();
-        addNewAvailableOffer.execute(new AvailableOffer(HOST, offerId, Seats.fromInt(AVAILABLE_SEATS_AT_START), planning));
+        addNewAvailableOffer.execute(new AvailableOffer(HOST, offerId, Seats.fromInt(AVAILABLE_SEATS_AT_START), days));
         return offerId;
     }
 

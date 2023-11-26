@@ -5,8 +5,12 @@ public record Seats(int count) {
         return new Seats(availableSeats);
     }
 
+    public static Seats notFree() {
+        return new Seats(0);
+    }
+
     public Seats decrement() {
-        return new Seats(count() - 1);
+        return new Seats(Math.max(0, count() - 1));
     }
 
     public boolean haveFreePlaces() {
@@ -15,5 +19,9 @@ public record Seats(int count) {
 
     public Seats increment() {
         return new Seats(count + 1);
+    }
+
+    public boolean noneFree() {
+        return count == 0;
     }
 }

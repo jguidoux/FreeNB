@@ -19,6 +19,17 @@ class SeatsTest {
     }
 
     @Test
+    void should_be_never_lower_to_0_when_decrement() {
+        Seats seats = Seats.fromInt(0);
+
+        Seats decrementedSeats = seats.decrement();
+
+        assertThat(decrementedSeats).isEqualTo(Seats.fromInt(0));
+
+
+    }
+
+    @Test
     void all_seats_ere_occupied_when_value_is_0() {
 
         Seats seats = Seats.fromInt(0);

@@ -5,24 +5,25 @@ import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
 import com.zenika.training.freenb.reservation.domain.reservation.Reservation;
 import com.zenika.training.shared.AggregateRoot;
 
+import java.time.LocalDate;
+import java.util.Set;
+
 
 public class AvailableOffer extends AggregateRoot<OfferId> {
 
     private final HostId host;
-    private Seats availableSeats;
     private final Planning planning;
 
-    public AvailableOffer(HostId host, OfferId offerId, Seats seats, Planning planning) {
+    public AvailableOffer(HostId host, OfferId offerId, Seats seats, Set<LocalDate> days) {
         super(offerId);
-        this.availableSeats = seats;
         this.host = host;
-        this.planning = planning;
+        this.planning = Planning.fromListOfDays(days, seats);
     }
 
 
-    public Reservation book() {
-        Reservation reservation = new Reservation(id, host);
-        availableSeats = availableSeats.decrement();
+    public Reservation book(PeriodCriteria period) {
+        Reservation reservation = new Reservation(id, host, period);
+        planning.decrementSeatsFor(period);
         return reservation;
     }
 
@@ -30,13 +31,10 @@ public class AvailableOffer extends AggregateRoot<OfferId> {
         return false;
     }
 
-    public void bookRefused() {
-        availableSeats = availableSeats.increment();
+    public void bookRefused(PeriodCriteria periodCriteria) {
+        planning.incrementSeatsFor(periodCriteria);
     }
 
-    public Seats getAvailableSeats() {
-        return this.availableSeats;
-    }
 
     public Planning getPlanning() {
         return this.planning;
@@ -44,5 +42,13 @@ public class AvailableOffer extends AggregateRoot<OfferId> {
 
     public boolean containPeriod(PeriodCriteria period) {
         return planning.containPeriod(period);
+    }
+
+    public Seats getAvailableSeatsForDay(LocalDate day) {
+        return planning.getSeatsOf(day);
+    }
+
+    public boolean hasFreeSeatsFor(PeriodCriteria period) {
+        return planning.hasFreeSeatsFor(period);
     }
 }

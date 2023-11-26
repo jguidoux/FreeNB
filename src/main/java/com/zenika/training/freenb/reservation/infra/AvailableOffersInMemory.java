@@ -24,8 +24,8 @@ public class AvailableOffersInMemory implements AvailableOffers {
     public List<AvailableOffer> search(SearchQuery searchQuery) {
         PeriodCriteria period = searchQuery.period();
         return new ArrayList<>(repo.values()).stream()
-                                             .filter(offer -> offer.getAvailableSeats().haveFreePlaces())
-                .filter(availableOffer -> availableOffer.containPeriod(period))
+                                             .filter(offer -> offer.hasFreeSeatsFor(searchQuery.period()))
+                                             .filter(availableOffer -> availableOffer.containPeriod(period))
                                              .toList();
     }
 

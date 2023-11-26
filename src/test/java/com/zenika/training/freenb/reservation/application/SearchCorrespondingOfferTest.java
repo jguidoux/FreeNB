@@ -16,21 +16,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 class SearchCorrespondingOfferTest {
 
     public static final HostId HOST = HostId.create();
-    private Planning planning;
+    private Set<LocalDate> days;
 
     @BeforeEach
     void setUp() {
         LocalDate day1 = LocalDate.of(2023, 11, 1);
         LocalDate day2 = LocalDate.of(2023, 11, 2);
-        Set<LocalDate> days = Set.of(day1, day2);
-        planning = Planning.fromListOfDays(days);
+        days = Set.of(day1, day2);
     }
 
     @Test
     void should_find_some_corresponding_offers() {
 
         AvailableOffersInMemory repo = new AvailableOffersInMemory();
-        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(3), planning));
+        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(3), days));
         SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(repo);
 
         LocalDate from = LocalDate.of(2023, 11, 1);
@@ -47,7 +46,7 @@ class SearchCorrespondingOfferTest {
     void offer_with_no_free_seats_cant_be_found() {
 
         AvailableOffersInMemory repo = new AvailableOffersInMemory();
-        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(0), planning));
+        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(0), days));
         SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(repo);
 
         LocalDate from = LocalDate.of(2023, 11, 1);
@@ -65,7 +64,7 @@ class SearchCorrespondingOfferTest {
 
         AvailableOffersInMemory repo = new AvailableOffersInMemory();
         SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(repo);
-        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(3), planning));
+        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(3), days));
 
         LocalDate from = LocalDate.of(2023, 11, 1);
         LocalDate to = LocalDate.of(2023, 11, 2);
@@ -83,7 +82,7 @@ class SearchCorrespondingOfferTest {
 
         AvailableOffersInMemory repo = new AvailableOffersInMemory();
         SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(repo);
-        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(3), planning));
+        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(3), days));
 
         LocalDate from = LocalDate.of(2023, 12, 1);
         LocalDate to = LocalDate.of(2023, 12, 2);

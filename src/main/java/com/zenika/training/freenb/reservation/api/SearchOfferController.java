@@ -2,6 +2,8 @@ package com.zenika.training.freenb.reservation.api;
 
 import com.zenika.training.freenb.reservation.application.BookReservationService;
 import com.zenika.training.freenb.reservation.application.SearchCorrespondingOffers;
+import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
+import com.zenika.training.freenb.reservation.domain.availableoffers.CorrespondingOffer;
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.SearchQuery;
 import com.zenika.training.freenb.reservation.domain.reservation.Reservation;
@@ -31,7 +33,9 @@ public class SearchOfferController {
 
     @PostMapping("{offerId}/book")
     public ResponseEntity<BookingResponse> book(@PathVariable String offerId, @RequestBody BookingRequest request) {
-        Reservation reservation = bookingService.execute(new OfferId(offerId));
+        OfferId offerId1 = new OfferId(offerId);
+        CorrespondingOffer correspondingOffer = new CorrespondingOffer(offerId1, PeriodCriteria.between(request.from(), request.to()));
+        Reservation reservation = bookingService.execute(correspondingOffer);
         return ResponseEntity.ok(new BookingResponse(reservation.getId().value()));
     }
 }

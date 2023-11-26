@@ -28,19 +28,19 @@ class SearchOfferIT {
     @LocalServerPort
     private Integer port;
     private Planning planning;
+    private Set<LocalDate> days;
 
     @BeforeEach
     void setUp() {
         LocalDate day1 = LocalDate.of(2023, 11, 1);
         LocalDate day2 = LocalDate.of(2023, 11, 2);
-        Set<LocalDate> days = Set.of(day1, day2);
-        planning = Planning.fromListOfDays(days);
+        days = Set.of(day1, day2);
     }
 
     @Test
     void should_find_offers() {
         String offerId = UUID.randomUUID().toString();
-        AvailableOffer availableOffer = new AvailableOffer(HOST, new OfferId(offerId), Seats.fromInt(2), planning);
+        AvailableOffer availableOffer = new AvailableOffer(HOST, new OfferId(offerId), Seats.fromInt(2), days);
         repo.add(availableOffer);
 
         LocalDate from = LocalDate.of(2023, 11, 1);
