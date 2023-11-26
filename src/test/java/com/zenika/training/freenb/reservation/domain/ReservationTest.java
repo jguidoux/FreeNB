@@ -2,6 +2,7 @@ package com.zenika.training.freenb.reservation.domain;
 
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
 import com.zenika.training.freenb.reservation.domain.reservation.NotAuthorizeToRefuseReservation;
+import com.zenika.training.freenb.reservation.domain.reservation.PeriodCriteria;
 import com.zenika.training.freenb.reservation.domain.reservation.Reservation;
 import com.zenika.training.freenb.reservation.domain.reservation.ReservationStatus;
 import org.junit.jupiter.api.Test;

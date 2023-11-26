@@ -1,4 +1,6 @@
 package com.zenika.training.freenb.reservation.domain.availableoffers;
 
-public record SearchQuery(com.zenika.training.freenb.reservation.domain.PeriodCriteria period) {
+import com.zenika.training.freenb.reservation.domain.reservation.PeriodCriteria;
+
+public record SearchQuery(PeriodCriteria period) {
 }

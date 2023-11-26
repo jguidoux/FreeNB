@@ -1,6 +1,6 @@
 package com.zenika.training.freenb.reservation.domain.availableoffers;
 
-import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
+import com.zenika.training.freenb.reservation.domain.reservation.PeriodCriteria;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

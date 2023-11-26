@@ -1,7 +1,6 @@
 package com.zenika.training.freenb.reservation.domain.reservation;
 
 import com.zenika.training.freenb.reservation.domain.HostId;
-import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
 import com.zenika.training.shared.AggregateRoot;
 

@@ -1,10 +1,10 @@
 package com.zenika.training.freenb.reservation.infra;
 
-import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffers;
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.SearchQuery;
+import com.zenika.training.freenb.reservation.domain.reservation.PeriodCriteria;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
