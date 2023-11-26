@@ -1,6 +1,7 @@
 package com.zenika.training.freenb.reservation.domain.availableoffers;
 
 import com.zenika.training.freenb.reservation.domain.HostId;
+import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
 import com.zenika.training.freenb.reservation.domain.reservation.Reservation;
 import com.zenika.training.shared.AggregateRoot;
 
@@ -39,5 +40,9 @@ public class AvailableOffer extends AggregateRoot<OfferId> {
 
     public Planning getPlanning() {
         return this.planning;
+    }
+
+    public boolean containPeriod(PeriodCriteria period) {
+        return planning.containPeriod(period);
     }
 }

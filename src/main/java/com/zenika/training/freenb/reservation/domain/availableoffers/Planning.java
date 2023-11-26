@@ -1,8 +1,11 @@
 package com.zenika.training.freenb.reservation.domain.availableoffers;
 
+import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
+
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Planning {
     private final Set<LocalDate> days;
@@ -27,5 +30,11 @@ public class Planning {
     @Override
     public int hashCode() {
         return Objects.hash(days);
+    }
+
+    public boolean containPeriod(PeriodCriteria period) {
+        Set<LocalDate> allPeriodDays = period.from().datesUntil(period.to().plusDays(1))
+                                       .collect(Collectors.toUnmodifiableSet());
+        return days.containsAll(allPeriodDays);
     }
 }

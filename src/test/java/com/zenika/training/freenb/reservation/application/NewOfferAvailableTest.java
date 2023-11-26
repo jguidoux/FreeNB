@@ -1,6 +1,7 @@
 package com.zenika.training.freenb.reservation.application;
 
 import com.zenika.training.freenb.reservation.domain.HostId;
+import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
 import com.zenika.training.freenb.reservation.domain.availableoffers.*;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,10 @@ public class NewOfferAvailableTest {
 
         addOfferService.execute(availableOffer);
 
-        List<AvailableOffer> foundOffers = availableOffers.search(new SearchQuery());
+        LocalDate from = LocalDate.of(2023, 11, 1);
+        LocalDate to = LocalDate.of(2023, 11, 2);
+        PeriodCriteria period = PeriodCriteria.between(from, to);
+        List<AvailableOffer> foundOffers = availableOffers.search(new SearchQuery(period));
 
         assertThat(foundOffers).hasSize(1);
         AvailableOffer offer = foundOffers.get(0);

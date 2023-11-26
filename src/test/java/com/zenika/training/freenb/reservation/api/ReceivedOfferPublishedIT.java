@@ -1,6 +1,7 @@
 package com.zenika.training.freenb.reservation.api;
 
 import com.zenika.training.freenb.reservation.application.AddNewAvailableOffer;
+import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.Planning;
@@ -32,7 +33,11 @@ class ReceivedOfferPublishedIT {
 
         offerPublishedConsumer.receive(offerPublished);
 
-        List<AvailableOffer> foundOffers = repo.search(new SearchQuery());
+        LocalDate from = LocalDate.of(2023, 11, 1);
+        LocalDate to = LocalDate.of(2023, 11, 2);
+        PeriodCriteria period = PeriodCriteria.between(from, to);
+
+        List<AvailableOffer> foundOffers = repo.search(new SearchQuery(period));
         assertThat(foundOffers).hasSize(1);
         AvailableOffer offer = foundOffers.get(0);
         assertThat(offer.getId()).isEqualTo(new OfferId(offerId));

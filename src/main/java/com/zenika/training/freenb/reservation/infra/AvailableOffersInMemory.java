@@ -1,5 +1,6 @@
 package com.zenika.training.freenb.reservation.infra;
 
+import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffer;
 import com.zenika.training.freenb.reservation.domain.availableoffers.AvailableOffers;
 import com.zenika.training.freenb.reservation.domain.availableoffers.OfferId;
@@ -16,10 +17,15 @@ public class AvailableOffersInMemory implements AvailableOffers {
 
     private final Map<OfferId, AvailableOffer> repo = new HashMap<>();
 
+    /**
+     *
+     */
     @Override
     public List<AvailableOffer> search(SearchQuery searchQuery) {
+        PeriodCriteria period = searchQuery.period();
         return new ArrayList<>(repo.values()).stream()
                                              .filter(offer -> offer.getAvailableSeats().haveFreePlaces())
+                .filter(availableOffer -> availableOffer.containPeriod(period))
                                              .toList();
     }
 

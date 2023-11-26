@@ -1,6 +1,7 @@
 package com.zenika.training.freenb.reservation.api;
 
 import com.zenika.training.freenb.reservation.domain.HostId;
+import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
 import com.zenika.training.freenb.reservation.domain.availableoffers.*;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -42,7 +43,11 @@ class SearchOfferIT {
         AvailableOffer availableOffer = new AvailableOffer(HOST, new OfferId(offerId), Seats.fromInt(2), planning);
         repo.add(availableOffer);
 
-        SearchQuery searchQuery = new SearchQuery();
+        LocalDate from = LocalDate.of(2023, 11, 1);
+        LocalDate to = LocalDate.of(2023, 11, 2);
+        PeriodCriteria period = PeriodCriteria.between(from, to);
+
+        SearchQuery searchQuery = new SearchQuery(period);
         Response response = given()
                 .contentType(ContentType.JSON)
                 .body(searchQuery)

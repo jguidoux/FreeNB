@@ -6,6 +6,7 @@ import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
 import com.zenika.training.freenb.publishing.domain.workspace.Workspace;
 import com.zenika.training.freenb.publishing.domain.workspace.WorkspaceId;
 import com.zenika.training.freenb.publishing.domain.workspace.Workspaces;
+import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
 import com.zenika.training.freenb.reservation.domain.availableoffers.SearchQuery;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -44,7 +45,11 @@ public class SearchOfferPublishIT {
         String[] location = post.header("location").split("/");
         String offerId = location[location.length - 1];
 
-        SearchQuery searchQuery = new SearchQuery();
+        LocalDate from = LocalDate.of(2023, 11, 1);
+        LocalDate to = LocalDate.of(2023, 11, 2);
+        PeriodCriteria period = PeriodCriteria.between(from, to);
+
+        SearchQuery searchQuery = new SearchQuery(period);
         Response response = given()
                 .contentType(ContentType.JSON)
                 .body(searchQuery)

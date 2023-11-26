@@ -1,6 +1,7 @@
 package com.zenika.training.freenb.reservation.application;
 
 import com.zenika.training.freenb.reservation.domain.HostId;
+import com.zenika.training.freenb.reservation.domain.PeriodCriteria;
 import com.zenika.training.freenb.reservation.domain.availableoffers.*;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,8 +33,10 @@ class SearchCorrespondingOfferTest {
         repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(3), planning));
         SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(repo);
 
-
-        SearchQuery searchQuery = new SearchQuery();
+        LocalDate from = LocalDate.of(2023, 11, 1);
+        LocalDate to = LocalDate.of(2023, 11, 2);
+        PeriodCriteria period = PeriodCriteria.between(from, to);
+        SearchQuery searchQuery = new SearchQuery(period);
         List<CorrespondingOffer> offers = searchCorrespondingOffer.execute(searchQuery);
 
         assertThat(offers).hasSize(1);
@@ -41,14 +44,52 @@ class SearchCorrespondingOfferTest {
     }
 
     @Test
-    void offer1_with_no_free_seats_cant_be_fins() {
+    void offer_with_no_free_seats_cant_be_found() {
 
         AvailableOffersInMemory repo = new AvailableOffersInMemory();
         repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(0), planning));
         SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(repo);
 
+        LocalDate from = LocalDate.of(2023, 11, 1);
+        LocalDate to = LocalDate.of(2023, 11, 2);
+        PeriodCriteria period = PeriodCriteria.between(from, to);
+        SearchQuery searchQuery = new SearchQuery(period);
+        List<CorrespondingOffer> offers = searchCorrespondingOffer.execute(searchQuery);
 
-        SearchQuery searchQuery = new SearchQuery();
+        assertThat(offers).isEmpty();
+
+    }
+
+    @Test
+    void offers_with_availabilities_in_the_request_period_should_be_found() {
+
+        AvailableOffersInMemory repo = new AvailableOffersInMemory();
+        SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(repo);
+        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(3), planning));
+
+        LocalDate from = LocalDate.of(2023, 11, 1);
+        LocalDate to = LocalDate.of(2023, 11, 2);
+        PeriodCriteria period = PeriodCriteria.between(from, to);
+
+        SearchQuery searchQuery = new SearchQuery(period);
+        List<CorrespondingOffer> offers = searchCorrespondingOffer.execute(searchQuery);
+
+        assertThat(offers).hasSize(1);
+
+    }
+
+    @Test
+    void offers_with_no_availabilities_in_the_request_period_should_not_be_found() {
+
+        AvailableOffersInMemory repo = new AvailableOffersInMemory();
+        SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(repo);
+        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(3), planning));
+
+        LocalDate from = LocalDate.of(2023, 12, 1);
+        LocalDate to = LocalDate.of(2023, 12, 2);
+        PeriodCriteria period = PeriodCriteria.between(from, to);
+
+        SearchQuery searchQuery = new SearchQuery(period);
         List<CorrespondingOffer> offers = searchCorrespondingOffer.execute(searchQuery);
 
         assertThat(offers).isEmpty();
