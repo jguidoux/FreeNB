@@ -2,6 +2,9 @@ package com.zenika.training.freenb.reservation.domain.availableoffers;
 
 public record Seats(int count) {
     public static Seats fromInt(int availableSeats) {
+        if (availableSeats < 0) {
+            throw new SeatNumberShouldBePositive();
+        }
         return new Seats(availableSeats);
     }
 

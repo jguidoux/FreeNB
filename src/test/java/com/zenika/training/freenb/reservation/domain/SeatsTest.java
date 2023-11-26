@@ -1,11 +1,22 @@
 package com.zenika.training.freenb.reservation.domain;
 
+import com.zenika.training.freenb.reservation.domain.availableoffers.SeatNumberShouldBePositive;
 import com.zenika.training.freenb.reservation.domain.availableoffers.Seats;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class SeatsTest {
+
+    @Test
+    void seat_number_should_be_positive() {
+
+        assertThatThrownBy(() -> Seats.fromInt(-1))
+                .isInstanceOf(SeatNumberShouldBePositive.class);
+
+
+    }
 
     @Test
     void should_decrement() {

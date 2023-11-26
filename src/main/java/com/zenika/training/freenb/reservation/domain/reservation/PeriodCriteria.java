@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 public record PeriodCriteria(LocalDate from, LocalDate to) {
     public static PeriodCriteria between(LocalDate from, LocalDate to) {
+        if (to.isBefore(from)) {
+            throw new StartDateShouldBeBeforeEndDate();
+        }
         return new PeriodCriteria(from, to);
     }
 
