@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.Set;
 
+import static com.zenika.training.freenb.TestUtils.TWO_FIRST_DAYS_OF_NOVEMBER;
+import static com.zenika.training.freenb.TestUtils.TWO_FIRST_DAYS_OF_NOVEMBER_PERIOD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PlanningTest {
@@ -13,16 +15,11 @@ class PlanningTest {
 
     @Test
     void should_contain_the_period() {
-        LocalDate day1 = LocalDate.of(2023, 11, 1);
-        LocalDate day2 = LocalDate.of(2023, 11, 2);
-        Set<LocalDate> days = Set.of(day1, day2);
-        Planning planning = Planning.fromListOfDays(days, Seats.notFree());
 
-        LocalDate from = LocalDate.of(2023, 11, 1);
-        LocalDate to = LocalDate.of(2023, 11, 2);
-        PeriodCriteria period = PeriodCriteria.between(from, to);
+        Planning planning = Planning.fromListOfDays(TWO_FIRST_DAYS_OF_NOVEMBER, Seats.notFree());
 
-        boolean contained = planning.containPeriod(period);
+
+        boolean contained = planning.containPeriod(TWO_FIRST_DAYS_OF_NOVEMBER_PERIOD);
 
         assertThat(contained).isTrue();
 
@@ -30,10 +27,8 @@ class PlanningTest {
 
     @Test
     void should_not_contain_the_period() {
-        LocalDate day1 = LocalDate.of(2023, 11, 1);
-        LocalDate day2 = LocalDate.of(2023, 11, 2);
-        Set<LocalDate> days = Set.of(day1, day2);
-        Planning planning = Planning.fromListOfDays(days, Seats.notFree());
+
+        Planning planning = Planning.fromListOfDays(TWO_FIRST_DAYS_OF_NOVEMBER, Seats.notFree());
 
         LocalDate from = LocalDate.of(2023, 12, 1);
         LocalDate to = LocalDate.of(2023, 12, 2);
@@ -47,10 +42,8 @@ class PlanningTest {
 
     @Test
     void should_not_contain_the_period_when_last_days_is_upper_the_availabilities() {
-        LocalDate day1 = LocalDate.of(2023, 11, 1);
-        LocalDate day2 = LocalDate.of(2023, 11, 2);
-        Set<LocalDate> days = Set.of(day1, day2);
-        Planning planning = Planning.fromListOfDays(days, Seats.notFree());
+
+        Planning planning = Planning.fromListOfDays(TWO_FIRST_DAYS_OF_NOVEMBER, Seats.notFree());
 
         LocalDate from = LocalDate.of(2023, 11, 1);
         LocalDate to = LocalDate.of(2023, 11, 3);
@@ -64,10 +57,8 @@ class PlanningTest {
 
     @Test
     void should_not_contain_the_period_when_first_days_is_below_the_availabilities() {
-        LocalDate day1 = LocalDate.of(2023, 11, 1);
-        LocalDate day2 = LocalDate.of(2023, 11, 2);
-        Set<LocalDate> days = Set.of(day1, day2);
-        Planning planning = Planning.fromListOfDays(days, Seats.notFree());
+
+        Planning planning = Planning.fromListOfDays(TWO_FIRST_DAYS_OF_NOVEMBER, Seats.notFree());
 
         LocalDate from = LocalDate.of(2023, 10, 30);
         LocalDate to = LocalDate.of(2023, 11, 2);
@@ -81,10 +72,8 @@ class PlanningTest {
 
     @Test
     void should_not_contain_the_period_when_period_is_larger_than_availabilities() {
-        LocalDate day1 = LocalDate.of(2023, 11, 1);
-        LocalDate day2 = LocalDate.of(2023, 11, 2);
-        Set<LocalDate> days = Set.of(day1, day2);
-        Planning planning = Planning.fromListOfDays(days, Seats.notFree());
+        
+        Planning planning = Planning.fromListOfDays(TWO_FIRST_DAYS_OF_NOVEMBER, Seats.notFree());
 
         LocalDate from = LocalDate.of(2023, 10, 30);
         LocalDate to = LocalDate.of(2023, 11, 3);

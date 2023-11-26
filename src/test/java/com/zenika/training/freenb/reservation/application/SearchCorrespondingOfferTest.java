@@ -4,38 +4,29 @@ import com.zenika.training.freenb.reservation.domain.HostId;
 import com.zenika.training.freenb.reservation.domain.availableoffers.*;
 import com.zenika.training.freenb.reservation.domain.reservation.PeriodCriteria;
 import com.zenika.training.freenb.reservation.infra.AvailableOffersInMemory;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
+import static com.zenika.training.freenb.TestUtils.TWO_FIRST_DAYS_OF_NOVEMBER;
+import static com.zenika.training.freenb.TestUtils.TWO_FIRST_DAYS_OF_NOVEMBER_PERIOD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SearchCorrespondingOfferTest {
 
     public static final HostId HOST = HostId.create();
-    private Set<LocalDate> days;
+    public static final Seats THREE_SEATS = Seats.fromInt(3);
 
-    @BeforeEach
-    void setUp() {
-        LocalDate day1 = LocalDate.of(2023, 11, 1);
-        LocalDate day2 = LocalDate.of(2023, 11, 2);
-        days = Set.of(day1, day2);
-    }
 
     @Test
     void should_find_some_corresponding_offers() {
 
         AvailableOffersInMemory repo = new AvailableOffersInMemory();
-        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(3), days));
+        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(3), TWO_FIRST_DAYS_OF_NOVEMBER));
         SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(repo);
 
-        LocalDate from = LocalDate.of(2023, 11, 1);
-        LocalDate to = LocalDate.of(2023, 11, 2);
-        PeriodCriteria period = PeriodCriteria.between(from, to);
-        SearchQuery searchQuery = new SearchQuery(period);
+        SearchQuery searchQuery = new SearchQuery(TWO_FIRST_DAYS_OF_NOVEMBER_PERIOD);
         List<CorrespondingOffer> offers = searchCorrespondingOffer.execute(searchQuery);
 
         assertThat(offers).hasSize(1);
@@ -46,13 +37,10 @@ class SearchCorrespondingOfferTest {
     void offer_with_no_free_seats_cant_be_found() {
 
         AvailableOffersInMemory repo = new AvailableOffersInMemory();
-        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(0), days));
+        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.notFree(), TWO_FIRST_DAYS_OF_NOVEMBER));
         SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(repo);
 
-        LocalDate from = LocalDate.of(2023, 11, 1);
-        LocalDate to = LocalDate.of(2023, 11, 2);
-        PeriodCriteria period = PeriodCriteria.between(from, to);
-        SearchQuery searchQuery = new SearchQuery(period);
+        SearchQuery searchQuery = new SearchQuery(TWO_FIRST_DAYS_OF_NOVEMBER_PERIOD);
         List<CorrespondingOffer> offers = searchCorrespondingOffer.execute(searchQuery);
 
         assertThat(offers).isEmpty();
@@ -64,13 +52,10 @@ class SearchCorrespondingOfferTest {
 
         AvailableOffersInMemory repo = new AvailableOffersInMemory();
         SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(repo);
-        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(3), days));
+        repo.add(new AvailableOffer(HOST, OfferId.create(), THREE_SEATS, TWO_FIRST_DAYS_OF_NOVEMBER));
 
-        LocalDate from = LocalDate.of(2023, 11, 1);
-        LocalDate to = LocalDate.of(2023, 11, 2);
-        PeriodCriteria period = PeriodCriteria.between(from, to);
 
-        SearchQuery searchQuery = new SearchQuery(period);
+        SearchQuery searchQuery = new SearchQuery(TWO_FIRST_DAYS_OF_NOVEMBER_PERIOD);
         List<CorrespondingOffer> offers = searchCorrespondingOffer.execute(searchQuery);
 
         assertThat(offers).hasSize(1);
@@ -82,7 +67,7 @@ class SearchCorrespondingOfferTest {
 
         AvailableOffersInMemory repo = new AvailableOffersInMemory();
         SearchCorrespondingOffers searchCorrespondingOffer = new SearchCorrespondingOffers(repo);
-        repo.add(new AvailableOffer(HOST, OfferId.create(), Seats.fromInt(3), days));
+        repo.add(new AvailableOffer(HOST, OfferId.create(), THREE_SEATS, TWO_FIRST_DAYS_OF_NOVEMBER));
 
         LocalDate from = LocalDate.of(2023, 12, 1);
         LocalDate to = LocalDate.of(2023, 12, 2);

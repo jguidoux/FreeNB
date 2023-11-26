@@ -18,6 +18,8 @@ import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
 
+import static com.zenika.training.freenb.TestUtils.NOV_1;
+import static com.zenika.training.freenb.TestUtils.NOV_2;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.not;
 
@@ -25,6 +27,7 @@ import static org.hamcrest.Matchers.not;
 class BookOfferIT {
 
     public static final HostId HOST = HostId.create();
+    public static final Seats TWO_FREE_SEATS = Seats.fromInt(2);
     @Autowired
     AvailableOffers availableOffers;
     @LocalServerPort
@@ -32,18 +35,9 @@ class BookOfferIT {
 
     @Test
     void should_find_offers() {
-        String offerId = UUID.randomUUID().toString();
-        LocalDate day1 = LocalDate.of(2023, 11, 1);
-        LocalDate day2 = LocalDate.of(2023, 11, 2);
-        Set<LocalDate> days = Set.of(day1, day2);
-        AvailableOffer availableOffer = new AvailableOffer(HOST, new OfferId(offerId), Seats.fromInt(2), days);
-        availableOffers.add(availableOffer);
+        String offerId = anOfferIsAvailable();
 
-
-        LocalDate from = LocalDate.of(2023, 11, 1);
-        LocalDate to = LocalDate.of(2023, 11, 2);
-
-        BookingRequest bookingRequest = new BookingRequest(from, to);
+        BookingRequest bookingRequest = new BookingRequest(NOV_1, NOV_2);
         Response response = given()
                 .contentType(ContentType.JSON)
                 .body(bookingRequest)
@@ -51,5 +45,13 @@ class BookOfferIT {
 
         response.then().statusCode(HttpStatus.OK.value())
                 .body("idReservation", not(IsEmptyString.emptyOrNullString()));
+    }
+
+    private String anOfferIsAvailable() {
+        String offerId = UUID.randomUUID().toString();
+        Set<LocalDate> days = Set.of(NOV_1, NOV_2);
+        AvailableOffer availableOffer = new AvailableOffer(HOST, new OfferId(offerId), TWO_FREE_SEATS, days);
+        availableOffers.add(availableOffer);
+        return offerId;
     }
 }

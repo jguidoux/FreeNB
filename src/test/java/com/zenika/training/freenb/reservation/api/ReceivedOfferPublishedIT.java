@@ -11,35 +11,38 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import static com.zenika.training.freenb.TestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ReceivedOfferPublishedIT {
 
+    public static final int CAPACITY_OF_2 = 2;
+
     @Test
     void should_insert_new_available_offer_from_published_offer() {
-        String offerId = UUID.randomUUID().toString();
-        String hostId = UUID.randomUUID().toString();
-        LocalDate day1 = LocalDate.of(2023, 11, 1);
-        LocalDate day2 = LocalDate.of(2023, 11, 2);
-        Set<LocalDate> days = Set.of(day1, day2);
-        OfferPublished offerPublished = new OfferPublished(hostId, offerId, 2, days);
-
         AvailableOffersInMemory repo = new AvailableOffersInMemory();
         AddNewAvailableOffer service = new AddNewAvailableOffer(repo);
         OfferPublishedConsumer offerPublishedConsumer = new OfferPublishedConsumer(service);
 
+        OfferPublished offerPublished = anOfferIsPublished();
+
         offerPublishedConsumer.receive(offerPublished);
 
-        LocalDate from = LocalDate.of(2023, 11, 1);
-        LocalDate to = LocalDate.of(2023, 11, 2);
-        PeriodCriteria period = PeriodCriteria.between(from, to);
-
+        PeriodCriteria period = PeriodCriteria.between(NOV_1, NOV_2);
         List<AvailableOffer> foundOffers = repo.search(new SearchQuery(period));
         assertThat(foundOffers).hasSize(1);
+
         AvailableOffer offer = foundOffers.get(0);
-        assertThat(offer.getId()).isEqualTo(new OfferId(offerId));
-        assertThat(offer.getPlanning()).isEqualTo(Planning.fromListOfDays(days, Seats.fromInt(2)));
+        assertThat(offer.getId()).isEqualTo(new OfferId(offerPublished.offerId()));
+        assertThat(offer.getPlanning()).isEqualTo(Planning.fromListOfDays(TWO_FIRST_DAYS_OF_NOVEMBER, Seats.fromInt(CAPACITY_OF_2)));
 
 
+    }
+
+    private static OfferPublished anOfferIsPublished() {
+        String offerId = UUID.randomUUID().toString();
+        String hostId = UUID.randomUUID().toString();
+        Set<LocalDate> days = Set.of(NOV_1, NOV_2);
+        return new OfferPublished(hostId, offerId, CAPACITY_OF_2, days);
     }
 }

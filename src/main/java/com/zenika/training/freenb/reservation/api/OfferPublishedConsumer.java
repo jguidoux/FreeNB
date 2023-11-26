@@ -20,7 +20,7 @@ public class OfferPublishedConsumer {
     @EventListener
     public void receive(OfferPublished offerPublished) {
         AvailableOffer availableOffers = new AvailableOffer(HostId.fromString(offerPublished.hostId()),
-                new OfferId(offerPublished.value()),
+                new OfferId(offerPublished.offerId()),
                 new Seats(offerPublished.capacity()),
                 offerPublished.planning());
         service.execute(availableOffers);

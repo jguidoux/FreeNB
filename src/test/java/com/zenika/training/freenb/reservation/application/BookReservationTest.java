@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
+import static com.zenika.training.freenb.TestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class BookReservationTest {
@@ -25,8 +25,6 @@ class BookReservationTest {
     private BookReservationService bookingService;
 
     private SearchCorrespondingOffers searchService;
-    private Set<LocalDate> days;
-    private Set<LocalDate> novemberDays;
 
     @BeforeEach
     void setUp() {
@@ -35,13 +33,6 @@ class BookReservationTest {
         bookingService = new BookReservationService(availableOffers, reservations);
         searchService = new SearchCorrespondingOffers(availableOffers);
 
-        LocalDate day1 = LocalDate.of(2023, 11, 1);
-        LocalDate day2 = LocalDate.of(2023, 11, 2);
-        days = Set.of(day1, day2);
-
-        novemberDays = LocalDate.of(2023, 11, 1).datesUntil(LocalDate.of(2023, 12, 1))
-                                .collect(Collectors.toSet());
-
     }
 
     @Test
@@ -49,8 +40,7 @@ class BookReservationTest {
 
         OfferId availableOfferId = existAvailableOfferWith(5);
 
-        PeriodCriteria period = getPeriodCriteria();
-        List<CorrespondingOffer> offers = searchService.execute(new SearchQuery(period));
+        List<CorrespondingOffer> offers = searchService.execute(new SearchQuery(TWO_FIRST_DAYS_OF_NOVEMBER_PERIOD));
         CorrespondingOffer correspondingOffer = offers.get(0);
 
         Reservation reservation = bookingService.execute(correspondingOffer);
@@ -63,8 +53,7 @@ class BookReservationTest {
     void new_reservation_should_be_saved() {
 
         existAvailableOfferWith(2);
-        PeriodCriteria period = getPeriodCriteria();
-        List<CorrespondingOffer> offers = searchService.execute(new SearchQuery(period));
+        List<CorrespondingOffer> offers = searchService.execute(new SearchQuery(TWO_FIRST_DAYS_OF_NOVEMBER_PERIOD));
         CorrespondingOffer correspondingOffer = offers.get(0);
 
         Reservation reservation = bookingService.execute(correspondingOffer);
@@ -76,12 +65,11 @@ class BookReservationTest {
     void should_no_possible_to_book_twice_same_period_when_1_seat_is_free() {
 
         existAvailableOfferWith(1);
-        PeriodCriteria period = getPeriodCriteria();
-        List<CorrespondingOffer> offers = searchService.execute(new SearchQuery(period));
+        List<CorrespondingOffer> offers = searchService.execute(new SearchQuery(TWO_FIRST_DAYS_OF_NOVEMBER_PERIOD));
         CorrespondingOffer correspondingOffer = offers.get(0);
         bookingService.execute(correspondingOffer);
 
-        List<CorrespondingOffer> secondSearchResult = searchService.execute(new SearchQuery(period));
+        List<CorrespondingOffer> secondSearchResult = searchService.execute(new SearchQuery(TWO_FIRST_DAYS_OF_NOVEMBER_PERIOD));
 
         assertThat(secondSearchResult).isEmpty();
     }
@@ -89,9 +77,8 @@ class BookReservationTest {
     @Test
     void should_be_possible_to_book_twice_same_offer_for_different_period_when_1_seat_is_free() {
 
-        existAvailableOfferWith(novemberDays, 1);
-        PeriodCriteria period = getPeriodCriteria();
-        List<CorrespondingOffer> offers = searchService.execute(new SearchQuery(period));
+        existAvailableOfferWith(NOVEMBER_DAYS, 1);
+        List<CorrespondingOffer> offers = searchService.execute(new SearchQuery(TWO_FIRST_DAYS_OF_NOVEMBER_PERIOD));
         CorrespondingOffer correspondingOffer = offers.get(0);
         bookingService.execute(correspondingOffer);
 
@@ -101,7 +88,7 @@ class BookReservationTest {
     }
 
     private OfferId existAvailableOfferWith(int availableSeats) {
-        return existAvailableOfferWith(days, availableSeats);
+        return existAvailableOfferWith(TWO_FIRST_DAYS_OF_NOVEMBER, availableSeats);
     }
 
     private OfferId existAvailableOfferWith(Set<LocalDate> someDays, int availableSeats) {
@@ -110,11 +97,6 @@ class BookReservationTest {
         return offerId;
     }
 
-    private static PeriodCriteria getPeriodCriteria() {
-        LocalDate from = LocalDate.of(2023, 11, 1);
-        LocalDate to = LocalDate.of(2023, 11, 2);
-        return PeriodCriteria.between(from, to);
-    }
 
     private static PeriodCriteria getSecondPeriodCriteria() {
         LocalDate from = LocalDate.of(2023, 11, 10);
