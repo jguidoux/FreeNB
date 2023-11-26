@@ -27,7 +27,6 @@ class SearchOfferIT {
     AvailableOffers repo;
     @LocalServerPort
     private Integer port;
-    private Planning planning;
     private Set<LocalDate> days;
 
     @BeforeEach
