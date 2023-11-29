@@ -1,6 +1,6 @@
 package com.zenika.training.freenb.publishing.api;
 
-import com.zenika.training.freenb.publishing.applcation.PublishOfferService;
+import com.zenika.training.freenb.publishing.application.PublishOfferService;
 import com.zenika.training.freenb.publishing.domain.offer.OfferId;
 import com.zenika.training.freenb.publishing.domain.offer.OfferPeriod;
 import com.zenika.training.freenb.publishing.domain.workspace.Capacity;

@@ -1,4 +1,4 @@
-package com.zenika.training.freenb.publishing.applcation;
+package com.zenika.training.freenb.publishing.application;
 
 import com.zenika.training.freenb.publishing.domain.offer.*;
 import com.zenika.training.freenb.publishing.domain.workspace.Capacity;
